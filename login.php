@@ -24,8 +24,8 @@
   	}else{
   		header("Location:login.html?login=passerror");
   		exit();	
-  	}
-  }else{
+  	
+}  }else{
   	header("Location:login.html?login=error");
   	exit();
   }
