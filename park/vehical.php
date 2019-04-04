@@ -126,8 +126,8 @@
                 <span>Booking</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="slotstaus.html"><i class="fa fa-circle-o"></i> Slots Status</a></li>
-                <li><a href="booking.html"><i class="fa fa-circle-o"></i> Booking Status</a></li>
+                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Slots Status</a></li>
+                <li><a href="booking.php"><i class="fa fa-circle-o"></i> Booking Status</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -136,8 +136,8 @@
                 <span>Parking</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="slotstaus.html"><i class="fa fa-circle-o"></i> Parking Status</a></li>
-                <li><a href="booking.html"><i class="fa fa-circle-o"></i> Live Status</a></li>
+                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Parking Status</a></li>
+                <li><a href="booking.php"><i class="fa fa-circle-o"></i> Live Status</a></li>
               </ul>
             </li>
             <li>
@@ -148,7 +148,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="oprator.html"><i class="fa fa-circle-o"></i> Oprator info</a></li>
+                <li><a href="oprator.php"><i class="fa fa-circle-o"></i> Oprator info</a></li>
               </ul>
             </li>
 
@@ -159,8 +159,8 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="customer.html"><i class="fa fa-circle-o"></i> Customer info</a></li>
-                <li><a href="vehical.html"><i class="fa fa-circle-o"></i> Vehical info</a></li>
+                <li><a href="customer.php"><i class="fa fa-circle-o"></i> Customer info</a></li>
+                <li><a href="vehical.php"><i class="fa fa-circle-o"></i> Vehical info</a></li>
               </ul>
             </li>
 
@@ -195,9 +195,6 @@
                 <small class="label pull-right bg-red">3</small>
               </a>
             </li>
-          
-            
-            <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
