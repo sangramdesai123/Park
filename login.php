@@ -8,6 +8,9 @@
 
   /*check the username and password match from database*/
   $sql="SELECT * FROM `admin` WHERE username='".$username."'";
+
+  
+
   $result=mysqli_query($con,$sql);
   $result_check=mysqli_num_rows($result);
   $row=mysqli_fetch_array($result);

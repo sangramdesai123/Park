@@ -1,0 +1,16 @@
+weekends/weeks  
+time of day
+time of year
+time of month
+monthly 
+quarterly
+yearly
+
+
+SELECT MONTHNAME(entry_time),count(1) from Booking
+where YEAR(entry_time)=2018
+GROUP by MONTH(entry_time) ;
+
+
+
+
