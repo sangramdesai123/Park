@@ -211,7 +211,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Vehicle Data
+            Oprator Data
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -225,7 +225,7 @@
             <div class="col-xs-12">
               <div class="box">
                 <div class="box-header">
-                  <h3 class="box-title">Vehicle table</h3>
+                  <h3 class="box-title">Oprator info table</h3>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <table id="example1" class="table table-bordered table-striped">
