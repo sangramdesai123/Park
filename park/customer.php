@@ -36,7 +36,7 @@ session_start();
 
       <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="../../index.php" class="logo">
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>A</b>LT</span>
           <!-- logo for regular state and mobile devices -->
@@ -73,7 +73,7 @@ session_start();
                       <a href="#" class="btn btn-success btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-danger btn-flat">Sign out</a>
+                      <a href="../logout.php" class="btn btn-danger btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
@@ -118,7 +118,7 @@ session_start();
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index2.html"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
+                <li class="active"><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
               </ul>
             </li>
             <li class="treeview">

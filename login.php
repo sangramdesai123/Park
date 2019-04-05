@@ -19,7 +19,7 @@
   	if($row['password']==$password){
   		/*login succesful*/
       $_SESSION['username']=$username;
-  		header("Location:./park/index2.html?login=success");
+  		header("Location:./park/index.php?login=success");
   		exit();	
 
   	}else{
