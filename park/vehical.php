@@ -73,7 +73,7 @@
                       <a href="#" class="btn btn-success btn-flat">Profile</a>
                     </div>
                     <div class="pull-right">
-                      <a href="#" class="btn btn-danger btn-flat">Sign out</a>
+                      <a href="index.php" class="btn btn-danger btn-flat">Sign out</a>
                     </div>
                   </li>
                 </ul>
