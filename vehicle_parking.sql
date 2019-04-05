@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
+<<<<<<< HEAD
 -- Generation Time: Apr 05, 2019 at 05:44 AM
+=======
+-- Generation Time: Apr 05, 2019 at 08:50 AM
+>>>>>>> 27936b1dcbc31666e1a1f226a44ee320fe9092a2
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -28,6 +32,34 @@ SET time_zone = "+00:00";
 -- Table structure for table `Base_Fare`
 --
 
+<<<<<<< HEAD
+=======
+CREATE TABLE `admin` (
+  `username` varchar(256) NOT NULL,
+  `first_name` varchar(256) NOT NULL,
+  `last_name` varchar(256) NOT NULL,
+  `contact` varchar(250) NOT NULL,
+  `address` varchar(256) NOT NULL,
+  `adhaar_number` int(20) NOT NULL,
+  `photo` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `photo`, `password`) VALUES
+('sangram', 'sangram', 'desai', '8879217944', '1/5 shree niwas', 1234567890, './img/admin.png', '123'),
+('tushar', 'Tushar', 'kadam', '789765441', 'uytuyt asdf whywhed 12', 123566787, 'img/tush.png', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `Base_Fare`
+--
+
+>>>>>>> 27936b1dcbc31666e1a1f226a44ee320fe9092a2
 CREATE TABLE `Base_Fare` (
   `vehicle_category` varchar(20) NOT NULL,
   `fare` float NOT NULL
@@ -275,6 +307,102 @@ CREATE TABLE `Normal_User` (
   `OTP` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+<<<<<<< HEAD
+=======
+--
+-- Dumping data for table `Normal_User`
+--
+
+INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
+('Aaron', 'Aaron', 'Glenn', 2147483647, '42734', 'Vidyavihar', 9622),
+('Agustin', 'Agustin', 'Jones', 2147483647, '42930', 'Airoli', 8384),
+('Aline', 'Aline', 'Salmons', 2147483647, '36710', 'Mumbai', 600),
+('Anna', 'Anna', 'Larson', 2147483647, '37348', 'Airoli', 6952),
+('Annie', 'Annie', 'Zuckerman', 2147483647, '42801', 'Vidyavihar', 9184),
+('Armando', 'Armando', 'Lewis', 2147483647, '38836', 'Vidyavihar', 7831),
+('Ashley', 'Ashley', 'Cooley', 2147483647, '34009', 'Airoli', 4551),
+('Barbara', 'Barbara', 'Brodi', 2147483647, '40077', 'Airoli', 1941),
+('Belinda', 'Belinda', 'Holt', 2147483647, '40758', 'Pune', 4827),
+('Bette', 'Bette', 'Arocho', 2147483647, '38999', 'Vidyavihar', 1344),
+('Blanch', 'Blanch', 'Mitchell', 2147483647, '35602', 'Mumbai', 3830),
+('Bobbye', 'Bobbye', 'Watson', 2147483647, '33950', 'Airoli', 8691),
+('Boyd', 'Boyd', 'Shindle', 2147483647, '39884', 'Mumbai', 4880),
+('Calvin', 'Calvin', 'White', 2147483647, '42089', 'Mumbai', 3463),
+('Cedric', 'Cedric', 'Garner', 2147483647, '35355', 'Vidyavihar', 5178),
+('Christa', 'Christa', 'Jones', 2147483647, '37325', 'Pune', 4745),
+('Christina', 'Christina', 'Arce', 2147483647, '38342', 'Airoli', 588),
+('Claude', 'Claude', 'North', 2147483647, '38962', 'Mumbai', 2493),
+('Craig', 'Craig', 'Machado', 2147483647, '40785', 'Airoli', 9694),
+('David', 'David', 'Snyder', 2147483647, '34913', 'Pune', 8854),
+('Debra', 'Debra', 'Collins', 2147483647, '35235', 'Airoli', 6073),
+('Delisa', 'Delisa', 'Brogan', 2147483647, '43410', 'Vidyavihar', 7511),
+('Dominic', 'Dominic', 'Thames', 2147483647, '35435', 'Mumbai', 7070),
+('Doris', 'Doris', 'Fenton', 2147483647, '38878', 'Mumbai', 3882),
+('Edward', 'Edward', 'Olivera', 2147483647, '41906', 'Airoli', 8245),
+('Elwood', 'Elwood', 'Namm', 2147483647, '36922', 'Airoli', 905),
+('Evelyn', 'Evelyn', 'Swank', 2147483647, '38476', 'Pune', 1682),
+('Glenda', 'Glenda', 'Miller', 2147483647, '40920', 'Vidyavihar', 9844),
+('Harvey', 'Harvey', 'Selby', 2147483647, '37955', 'Mumbai', 3257),
+('Helen', 'Helen', 'Pomroy', 2147483647, '39490', 'Mumbai', 3340),
+('Heriberto', 'Heriberto', 'Kelly', 2147483647, '37979', 'Mumbai', 5139),
+('Holly', 'Holly', 'Colony', 2147483647, '40814', 'Pune', 5234),
+('Hugh', 'Hugh', 'Blanco', 2147483647, '41773', 'Vidyavihar', 5937),
+('Jacqueline', 'Jacqueline', 'Brooker', 2147483647, '35973', 'Airoli', 860),
+('James', 'James', 'Peterson', 2147483647, '37290', 'Airoli', 8063),
+('Jane', 'Jane', 'Willems', 2147483647, '35710', 'Mumbai', 3745),
+('Janet', 'Janet', 'Manuel', 2147483647, '38728', 'Pune', 5664),
+('Jeffrey', 'Jeffrey', 'Borelli', 2147483647, '35788', 'Pune', 2564),
+('Jesse', 'Jesse', 'Moore', 2147483647, '33989', 'Pune', 9820),
+('John', 'John', 'Fernandez', 2147483647, '37852', 'Mumbai', 433),
+('Jose', 'Jose', 'Sandoval', 2147483647, '37177', 'Pune', 5444),
+('Joseph', 'Joseph', 'Fuller', 2147483647, '40780', 'Airoli', 1200),
+('Joshua', 'Joshua', 'Solis', 2147483647, '38491', 'Pune', 5813),
+('Judith', 'Judith', 'Nix', 2147483647, '43276', 'Mumbai', 6715),
+('Juliette', 'Juliette', 'Reardon', 2147483647, '38322', 'Airoli', 9988),
+('Kaitlyn', 'Kaitlyn', 'Rea', 2147483647, '35475', 'Pune', 852),
+('Kathleen', 'Kathleen', 'Smith', 2147483647, '39381', 'Mumbai', 7174),
+('Kenneth', 'Kenneth', 'Gagne', 2147483647, '34867', 'Vidyavihar', 8705),
+('Kim', 'Kim', 'Maranda', 2147483647, '36503', 'Pune', 1091),
+('Kristin', 'Kristin', 'Matteson', 2147483647, '34636', 'Airoli', 2923),
+('Laura', 'Laura', 'Carter', 2147483647, '39381', 'Airoli', 5496),
+('Lela', 'Lela', 'Buitron', 2147483647, '34956', 'Airoli', 5088),
+('Leo', 'Leo', 'Thornton', 2147483647, '35407', 'Mumbai', 5321),
+('Lisa', 'Lisa', 'Mccright', 2147483647, '35172', 'Airoli', 6778),
+('Mable', 'Mable', 'Martinez', 2147483647, '38334', 'Vidyavihar', 9450),
+('Mario', 'Mario', 'Talley', 2147483647, '34926', 'Airoli', 2900),
+('Mark', 'Mark', 'Hunter', 2147483647, '39661', 'Mumbai', 5226),
+('Mary', 'Mary', 'Rotunda', 2147483647, '41099', 'Mumbai', 6562),
+('Maryjane', 'Maryjane', 'Nardella', 2147483647, '41904', 'Mumbai', 7152),
+('Megan', 'Megan', 'Serrano', 2147483647, '41233', 'Mumbai', 3528),
+('Michael', 'Michael', 'Wallace', 2147483647, '34326', 'Airoli', 2936),
+('Mildred', 'Mildred', 'Harris', 2147483647, '41635', 'Airoli', 8211),
+('Nichelle', 'Nichelle', 'Harvey', 2147483647, '39263', 'Mumbai', 4112),
+('Nichole', 'Nichole', 'Klein', 2147483647, '33913', 'Airoli', 700),
+('Patricia', 'Patricia', 'Barker', 2147483647, '36481', 'Airoli', 3033),
+('Paul', 'Paul', 'Kelly', 2147483647, '35761', 'Mumbai', 8821),
+('Ramon', 'Ramon', 'Reed', 2147483647, '38366', 'Mumbai', 5157),
+('Raymond', 'Raymond', 'Ballard', 2147483647, '39805', 'Mumbai', 3017),
+('Rex', 'Rex', 'Seiber', 2147483647, '36791', 'Mumbai', 4570),
+('Robert', 'Robert', 'Wilson', 2147483647, '37329', 'Mumbai', 8453),
+('Rose', 'Rose', 'Mullins', 2147483647, '39601', 'Pune', 7915),
+('Sam', 'Sam', 'Roys', 2147483647, '41067', 'Pune', 3127),
+('Sandy', 'Sandy', 'Mazzariello', 2147483647, '34148', 'Pune', 1319),
+('Sara', 'Sara', 'Flint', 2147483647, '37445', 'Airoli', 3294),
+('Scott', 'Scott', 'Abbott', 2147483647, '37840', 'Pune', 6920),
+('Shannon', 'Shannon', 'Haug', 2147483647, '38286', 'Pune', 2180),
+('Shari', 'Shari', 'Ponce', 2147483647, '42786', 'Airoli', 9743),
+('Suzanne', 'Suzanne', 'Edelstein', 2147483647, '38166', 'Mumbai', 8289),
+('Tamra', 'Tamra', 'Fowler', 2147483647, '38652', 'Vidyavihar', 7352),
+('Therese', 'Therese', 'Mason', 2147483647, '42073', 'Pune', 6721),
+('Timothy', 'Timothy', 'Simpkins', 2147483647, '40237', 'Pune', 1530),
+('Victor', 'Victor', 'Brannon', 2147483647, '38085', 'Pune', 995),
+('Victoria', 'Victoria', 'Prisco', 2147483647, '38275', 'Mumbai', 4999),
+('Vincent', 'Vincent', 'Thomas', 2147483647, '39199', 'Pune', 4418),
+('Vivian', 'Vivian', 'Labrie', 2147483647, '40310', 'Airoli', 5196),
+('Wanda', 'Wanda', 'Johnson', 2147483647, '39825', 'Pune', 3819),
+('William', 'William', 'Pedraza', 2147483647, '40128', 'Mumbai', 9064);
+
+>>>>>>> 27936b1dcbc31666e1a1f226a44ee320fe9092a2
 -- --------------------------------------------------------
 
 --
@@ -352,13 +480,109 @@ CREATE TABLE `Vehicle_info` (
 
 INSERT INTO `Vehicle_info` (`username`, `plate_number`, `vehicle_category`, `vehicle_company`, `vehicle_model`) VALUES
 ('harsh', 'MH-0548', 'Four wheeler', 'Maruti Suzuki', 'Swift'),
-('harsh', 'MH-4597', 'Two wheeler', 'Tvs Bajaj', 'Pulsar');
+('Armando', 'MH-107392', 'Four wheeler', 'Ford', 'figo'),
+('Bobbye', 'MH-111091', 'Four wheeler', 'Ford', 'figo'),
+('Ashley', 'MH-126664', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Paul', 'MH-131402', 'Two wheeler', 'Hero', 'Karisma'),
+('Shari', 'MH-134888', 'Four wheeler', 'Ford', 'figo'),
+('Holly', 'MH-138144', 'Four wheeler', 'Ford', 'figo'),
+('Jane', 'MH-149616', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Mildred', 'MH-150671', 'Two wheeler', 'Hero', 'Honda'),
+('Doris', 'MH-151132', 'Two wheeler', 'Hero', 'Honda'),
+('Wanda', 'MH-154356', 'Two wheeler', 'TVS', 'Radeon'),
+('Laura', 'MH-156315', 'Two wheeler', 'TVS', 'Radeon'),
+('Leo', 'MH-161694', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Megan', 'MH-172359', 'Two wheeler', 'TVS', 'Apache'),
+('John', 'MH-190373', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Mark', 'MH-197764', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Suzanne', 'MH-21291', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Boyd', 'MH-213396', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Janet', 'MH-239139', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Raymond', 'MH-241869', 'Four wheeler', 'Toyoto ', 'Camry'),
+('Kristin', 'MH-248712', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Sara', 'MH-256570', 'Two wheeler', 'Bajaj', 'Dominar'),
+('Timothy', 'MH-260439', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Vivian', 'MH-276231', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Victor', 'MH-298552', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Mable', 'MH-315569', 'Two wheeler', 'Hero', 'Karisma'),
+('Jacqueline', 'MH-35042', 'Four wheeler', 'Toyoto ', 'Camry'),
+('Kathleen', 'MH-35325', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Nichole', 'MH-359647', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Dominic', 'MH-364508', 'Two wheeler', 'TVS', 'Apache'),
+('William', 'MH-373886', 'Two wheeler', 'Hero', 'Karisma'),
+('Therese', 'MH-382786', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Vincent', 'MH-388209', 'Two wheeler', 'Bajaj', 'Dominar'),
+('Michael', 'MH-401168', 'Four wheeler', 'Ford', 'figo'),
+('James', 'MH-406179', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Joseph', 'MH-410145', 'Two wheeler', 'Bajaj', 'Dominar'),
+('Kenneth', 'MH-425773', 'Two wheeler', 'Hero', 'Honda'),
+('Heriberto', 'MH-437724', 'Two wheeler', 'Hero', 'Karisma'),
+('Lisa', 'MH-449904', 'Four wheeler', 'Ford', 'figo'),
+('harsh', 'MH-4597', 'Two wheeler', 'Tvs Bajaj', 'Pulsar'),
+('Aaron', 'MH-461474', 'Two wheeler', 'Hero', 'Karisma'),
+('Sandy', 'MH-463951', 'Four wheeler', 'Toyoto ', 'Camry'),
+('Sam', 'MH-479908', 'Two wheeler', 'Hero', 'Karisma'),
+('Elwood', 'MH-507523', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Claude', 'MH-517382', 'Four wheeler', 'Ford', 'Aspire'),
+('Tamra', 'MH-524584', 'Two wheeler', 'Hero', 'Karisma'),
+('Belinda', 'MH-560694', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Patricia', 'MH-563731', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Debra', 'MH-564949', 'Two wheeler', 'Hero', 'Karisma'),
+('Jose', 'MH-581771', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Kim', 'MH-587042', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Edward', 'MH-591181', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Delisa', 'MH-619636', 'Four wheeler', 'Ford', 'Aspire'),
+('Kaitlyn', 'MH-627380', 'Four wheeler', 'Toyoto ', 'Camry'),
+('Evelyn', 'MH-636571', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Nichelle', 'MH-647138', 'Four wheeler', 'Ford', 'Aspire'),
+('Helen', 'MH-665431', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Robert', 'MH-673560', 'Four wheeler', 'Ford', 'Aspire'),
+('Bette', 'MH-709624', 'Two wheeler', 'TVS', 'Radeon'),
+('Blanch', 'MH-724942', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Christina', 'MH-738485', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Victoria', 'MH-739211', 'Four wheeler', 'Ford', 'figo'),
+('Glenda', 'MH-739371', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Christa', 'MH-741671', 'Four wheeler', 'Ford', 'figo'),
+('Rex', 'MH-744754', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Annie', 'MH-763317', 'Two wheeler', 'Bajaj', 'Dominar'),
+('Maryjane', 'MH-772598', 'Four wheeler', 'Toyoto ', 'Camry'),
+('David', 'MH-802148', 'Two wheeler', 'TVS', 'Radeon'),
+('Lela', 'MH-824332', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Aline', 'MH-831961', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Juliette', 'MH-857127', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Jeffrey', 'MH-864902', 'Four wheeler', 'Ford', 'figo'),
+('Judith', 'MH-878964', 'Two wheeler', 'Hero', 'Honda'),
+('Barbara', 'MH-879919', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Mary', 'MH-898700', 'Two wheeler', 'Bajaj', 'Pulsar'),
+('Jesse', 'MH-899356', 'Four wheeler', 'Ford', 'figo'),
+('Calvin', 'MH-903009', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Anna', 'MH-912460', 'Four wheeler', 'Toyoto ', 'Yaris'),
+('Rose', 'MH-913064', 'Four wheeler', 'Ford', 'figo'),
+('Mario', 'MH-922335', 'Four wheeler', 'Maruti Suzuki', 'swift'),
+('Agustin', 'MH-92910', 'Two wheeler', 'TVS', 'Radeon'),
+('Harvey', 'MH-946721', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Shannon', 'MH-949351', 'Four wheeler', 'Toyoto ', 'Camry'),
+('Joshua', 'MH-953146', 'Four wheeler', 'Ford', 'figo'),
+('Craig', 'MH-961739', 'Two wheeler', 'TVS', 'Radeon'),
+('Ramon', 'MH-974984', 'Four wheeler', 'Ford', 'figo'),
+('Scott', 'MH-979416', 'Two wheeler', 'Hero', 'Karisma'),
+('Hugh', 'MH-980890', 'Four wheeler', 'Maruti Suzuki', 'wagonR'),
+('Cedric', 'MH-987029', 'Two wheeler', 'Hero', 'Honda');
 
 --
 -- Indexes for dumped tables
 --
 
 --
+<<<<<<< HEAD
+=======
+-- Indexes for table `admin`
+--
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`username`);
+
+--
+>>>>>>> 27936b1dcbc31666e1a1f226a44ee320fe9092a2
 -- Indexes for table `Base_Fare`
 --
 ALTER TABLE `Base_Fare`
