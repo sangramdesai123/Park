@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 04, 2019 at 09:54 PM
+-- Generation Time: Apr 05, 2019 at 05:44 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.2.12
 
@@ -185,12 +185,13 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 ('Cedric', 'Cedric', 'Normal'),
 ('Christa', 'Christa', 'Normal'),
 ('Christina', 'Christina', 'Normal'),
-('cis_pie', '123', 'Normal'),
+('cis_pie', '123', 'Operator'),
 ('Claude', 'Claude', 'Normal'),
 ('Craig', 'Craig', 'Normal'),
 ('David', 'David', 'Normal'),
 ('Debra', 'Debra', 'Normal'),
 ('Delisa', 'Delisa', 'Normal'),
+('desai_sangram', 'sangu', 'Operator'),
 ('Dominic', 'Dominic', 'Normal'),
 ('Doris', 'Doris', 'Normal'),
 ('Edward', 'Edward', 'Normal'),
@@ -274,13 +275,6 @@ CREATE TABLE `Normal_User` (
   `OTP` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `Normal_User`
---
-
-INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
-('harsh', 'Harsh', 'Gandhi', 0, 'licence', 'address', 123);
-
 -- --------------------------------------------------------
 
 --
@@ -296,6 +290,14 @@ CREATE TABLE `Operator_User` (
   `adhaar_number` int(12) NOT NULL,
   `photo` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `Operator_User`
+--
+
+INSERT INTO `Operator_User` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `photo`) VALUES
+('cis_pie', 'Tushar', 'Kadam', 86555, 'Airoli', 35563, '/opt/lampp/htdocs/Park/park/operator_pics/tushar.jpeg'),
+('desai_sangram', 'sangram', 'desai', 34534, 'Mumbai', 678564, '/opt/lampp/htdocs/Park/park/operator_pics/sangram.jpeg');
 
 -- --------------------------------------------------------
 
