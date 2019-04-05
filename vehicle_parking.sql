@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.2
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 29, 2019 at 05:18 PM
--- Server version: 10.1.34-MariaDB
--- PHP Version: 7.2.8
+-- Host: 127.0.0.1
+-- Generation Time: Apr 04, 2019 at 09:55 PM
+-- Server version: 10.1.30-MariaDB
+-- PHP Version: 7.2.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -25,29 +25,53 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Base_Fare`
+-- Table structure for table `admin`
 --
 
-CREATE TABLE `Base_Fare` (
+CREATE TABLE `admin` (
+  `username` varchar(256) NOT NULL,
+  `first_name` varchar(256) NOT NULL,
+  `last_name` varchar(256) NOT NULL,
+  `contact` varchar(250) NOT NULL,
+  `address` varchar(256) NOT NULL,
+  `adhaar_number` int(20) NOT NULL,
+  `photo` varchar(256) NOT NULL,
+  `password` varchar(256) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `photo`, `password`) VALUES
+('sangram', 'sangram', 'desai', '8879217944', '1/5 shree niwas', 1234567890, './img/admin.png', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `base_fare`
+--
+
+CREATE TABLE `base_fare` (
   `vehicle_category` varchar(20) NOT NULL,
   `fare` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Base_Fare`
+-- Dumping data for table `base_fare`
 --
 
-INSERT INTO `Base_Fare` (`vehicle_category`, `fare`) VALUES
+INSERT INTO `base_fare` (`vehicle_category`, `fare`) VALUES
 ('Four wheeler', 30),
 ('Two wheeler', 20);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Booking`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE `Booking` (
+CREATE TABLE `booking` (
   `username` varchar(15) NOT NULL,
   `booking_id` int(10) NOT NULL,
   `vehicle_category` varchar(20) NOT NULL,
@@ -106,10 +130,10 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Normal_User`
+-- Table structure for table `normal_user`
 --
 
-CREATE TABLE `Normal_User` (
+CREATE TABLE `normal_user` (
   `username` varchar(15) NOT NULL,
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
@@ -120,10 +144,10 @@ CREATE TABLE `Normal_User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Normal_User`
+-- Dumping data for table `normal_user`
 --
 
-INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
+INSERT INTO `normal_user` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
 ('bc', '', '', 0, '', '', 22007),
 ('cx', '', '', 0, '', '', 86465),
 ('cxs', 'ghr', '', 0, '', '', 74509),
@@ -151,10 +175,10 @@ INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `li
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Operator_User`
+-- Table structure for table `operator_user`
 --
 
-CREATE TABLE `Operator_User` (
+CREATE TABLE `operator_user` (
   `username` varchar(15) NOT NULL,
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
@@ -167,10 +191,10 @@ CREATE TABLE `Operator_User` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Parking_info`
+-- Table structure for table `parking_info`
 --
 
-CREATE TABLE `Parking_info` (
+CREATE TABLE `parking_info` (
   `level_number` int(5) NOT NULL,
   `number_of_slots` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -178,10 +202,10 @@ CREATE TABLE `Parking_info` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Slot_Status`
+-- Table structure for table `slot_status`
 --
 
-CREATE TABLE `Slot_Status` (
+CREATE TABLE `slot_status` (
   `level_number` int(5) NOT NULL,
   `slot_number` int(5) NOT NULL,
   `booking_id` int(10) NOT NULL,
@@ -191,10 +215,10 @@ CREATE TABLE `Slot_Status` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Vehicle_info`
+-- Table structure for table `vehicle_info`
 --
 
-CREATE TABLE `Vehicle_info` (
+CREATE TABLE `vehicle_info` (
   `username` varchar(15) NOT NULL,
   `plate_number` varchar(15) NOT NULL,
   `vehicle_category` varchar(20) NOT NULL,
@@ -203,10 +227,10 @@ CREATE TABLE `Vehicle_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Vehicle_info`
+-- Dumping data for table `vehicle_info`
 --
 
-INSERT INTO `Vehicle_info` (`username`, `plate_number`, `vehicle_category`, `vehicle_company`, `vehicle_model`) VALUES
+INSERT INTO `vehicle_info` (`username`, `plate_number`, `vehicle_category`, `vehicle_company`, `vehicle_model`) VALUES
 ('harsh', 'MH-0548', 'Four wheeler', 'Maruti Suzuki', 'Swift'),
 ('harsh', 'MH-4597', 'Two wheeler', 'Tvs Bajaj', 'Pulsar');
 
@@ -215,15 +239,21 @@ INSERT INTO `Vehicle_info` (`username`, `plate_number`, `vehicle_category`, `veh
 --
 
 --
--- Indexes for table `Base_Fare`
+-- Indexes for table `admin`
 --
-ALTER TABLE `Base_Fare`
+ALTER TABLE `admin`
+  ADD PRIMARY KEY (`username`);
+
+--
+-- Indexes for table `base_fare`
+--
+ALTER TABLE `base_fare`
   ADD PRIMARY KEY (`vehicle_category`);
 
 --
--- Indexes for table `Booking`
+-- Indexes for table `booking`
 --
-ALTER TABLE `Booking`
+ALTER TABLE `booking`
   ADD PRIMARY KEY (`username`,`booking_id`),
   ADD UNIQUE KEY `OTP` (`OTP`),
   ADD UNIQUE KEY `booking_id` (`booking_id`),
@@ -237,35 +267,35 @@ ALTER TABLE `login_info`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Normal_User`
+-- Indexes for table `normal_user`
 --
-ALTER TABLE `Normal_User`
+ALTER TABLE `normal_user`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `OTP` (`OTP`);
 
 --
--- Indexes for table `Operator_User`
+-- Indexes for table `operator_user`
 --
-ALTER TABLE `Operator_User`
+ALTER TABLE `operator_user`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Parking_info`
+-- Indexes for table `parking_info`
 --
-ALTER TABLE `Parking_info`
+ALTER TABLE `parking_info`
   ADD PRIMARY KEY (`level_number`);
 
 --
--- Indexes for table `Slot_Status`
+-- Indexes for table `slot_status`
 --
-ALTER TABLE `Slot_Status`
+ALTER TABLE `slot_status`
   ADD PRIMARY KEY (`level_number`,`slot_number`),
   ADD KEY `booking_id_fk` (`booking_id`);
 
 --
--- Indexes for table `Vehicle_info`
+-- Indexes for table `vehicle_info`
 --
-ALTER TABLE `Vehicle_info`
+ALTER TABLE `vehicle_info`
   ADD PRIMARY KEY (`plate_number`),
   ADD KEY `username_fk_v` (`username`),
   ADD KEY `category_fk` (`vehicle_category`);
@@ -275,30 +305,30 @@ ALTER TABLE `Vehicle_info`
 --
 
 --
--- Constraints for table `Booking`
+-- Constraints for table `booking`
 --
-ALTER TABLE `Booking`
-  ADD CONSTRAINT `category_fk_b` FOREIGN KEY (`vehicle_category`) REFERENCES `Base_Fare` (`vehicle_category`),
-  ADD CONSTRAINT `level_fk` FOREIGN KEY (`level_number`) REFERENCES `Parking_info` (`level_number`),
+ALTER TABLE `booking`
+  ADD CONSTRAINT `category_fk_b` FOREIGN KEY (`vehicle_category`) REFERENCES `base_fare` (`vehicle_category`),
+  ADD CONSTRAINT `level_fk` FOREIGN KEY (`level_number`) REFERENCES `parking_info` (`level_number`),
   ADD CONSTRAINT `username_fk_b` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 
 --
--- Constraints for table `Normal_User`
+-- Constraints for table `normal_user`
 --
-ALTER TABLE `Normal_User`
+ALTER TABLE `normal_user`
   ADD CONSTRAINT `username_fk` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 
 --
--- Constraints for table `Slot_Status`
+-- Constraints for table `slot_status`
 --
-ALTER TABLE `Slot_Status`
-  ADD CONSTRAINT `booking_id_fk` FOREIGN KEY (`booking_id`) REFERENCES `Booking` (`booking_id`);
+ALTER TABLE `slot_status`
+  ADD CONSTRAINT `booking_id_fk` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`);
 
 --
--- Constraints for table `Vehicle_info`
+-- Constraints for table `vehicle_info`
 --
-ALTER TABLE `Vehicle_info`
-  ADD CONSTRAINT `category_fk` FOREIGN KEY (`vehicle_category`) REFERENCES `Base_Fare` (`vehicle_category`),
+ALTER TABLE `vehicle_info`
+  ADD CONSTRAINT `category_fk` FOREIGN KEY (`vehicle_category`) REFERENCES `base_fare` (`vehicle_category`),
   ADD CONSTRAINT `username_fk_v` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 COMMIT;
 
