@@ -142,7 +142,7 @@
                 <li><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
               </ul>
             </li>
-            <li class="active treeview">
+            <li class=" treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Booking</span><i class="fa fa-angle-left pull-right"></i>
@@ -200,7 +200,7 @@
               </ul>
             </li>
       
-            <li class="treeview">
+            <li class="active treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Forms</span>
                 <i class="fa fa-angle-left pull-right"></i>
