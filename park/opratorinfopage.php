@@ -1,6 +1,6 @@
 <?php
-    session_start();
-    include_once("../config/config.php");
+	session_start();
+   include_once("../config/config.php");
 ?>                  
 <!DOCTYPE html>
 <html>
@@ -118,10 +118,10 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
+                <li class="active"><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
               </ul>
             </li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Booking</span><i class="fa fa-angle-left pull-right"></i>
@@ -137,12 +137,12 @@
                 <span>Parking</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Parking Status</a></li>
+                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Parking Status</a></li>
                 <li><a href="booking.php"><i class="fa fa-circle-o"></i> Live Status</a></li>
               </ul>
             </li>
             <li>
-            <li class="treeview">
+            <li class="active treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>Oprator Info</span>
@@ -188,8 +188,9 @@
                 <li><a href="./newmap.php"><i class="fa fa-circle-o"></i> Create New Map</a></li>
                 <li><a href="./newoprator.php"><i class="fa fa-circle-o"></i> New Oprator</a></li>
               </ul>
-                          </li>
+            </li>
             
+           
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
@@ -203,11 +204,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Slot Status Data
+            ADMIN info
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">slot</li>
+            <li class="active">oprator</li>
           </ol>
         </section>
 
@@ -216,41 +217,118 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Slot info table</h3>
-                </div><!-- /.box-header -->
+                
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Level</th>
-                        <th>Slot</th>
-                        <th>Booking Id</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                      <?php
-                        $query="select * from slot_status";
-                        $result=mysqli_query($con,$query);
-                        while($row=mysqli_fetch_array($result)){
-                        echo '
-                          <tr>
-                            <td>'.$row['level_number'].'</td>
-                            <td>'.$row['slot_number'].'</td>
-                            <td>'.$row['booking_id'].'</td>
-                            <td>'.$row['status'].'</td>
-                          </tr>
 
-                        ';
-                        }
-                      ?>
-                      
 
-                      
-                    </tbody>
-                  </table>
+                <!--oprator info goes here -->
+                <!-- row -->
+          <div class="row">
+            <div class="col-md-12">
+              <!-- The time line -->
+              <ul class="timeline">
+                <!-- timeline time label -->
+                <li class="time-label">
+                  <span class="bg-red">
+                    <?php 
+                    	echo "USER NAME : <b>".$_GET['name']."</b>";
+                    ?>
+                  </span>
+                </li>
+                <!-- /.timeline-label -->
+                <!-- timeline item -->
+                <?php
+                $first_name="";
+        		$last_name="";
+        		$contact="";
+        		$address="";
+        		$adhaar_number="";
+        		$photo="";
+                	$username=$_GET['name'];
+                	$sql="SELECT * FROM `admin` WHERE username='".$username."'";
+                	$res=mysqli_query($con,$sql);
+                	while ($row=mysqli_fetch_array($res)) {
+                		$first_name=$row['first_name'];
+                		$last_name=$row['last_name'];
+                		$contact=$row['contact'];
+                		$address=$row['address'];
+                		$adhaar_number=$row['adhaar_number'];
+                		$photo=$row['photo'];
+                	}
+                ?>
+                <li>
+                  <i class="fa fa-user bg-aqua"></i>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header no-border"><a href="#"><?php echo $first_name." ".$last_name; ?></a><br><br>
+                    First Name :<?php echo "\t".$first_name; ?><br>
+                    Last Name :<?php echo "\t".$last_name; ?><br>
+                    </h3>
+                  </div>
+                </li>
+                <li>
+                  <i class="fa fa-envelope bg-blue"></i>
+                  <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                    <h3 class="timeline-header"><a href="#">Email : </a> sent you an email</h3>
+                    <div class="timeline-body">
+                     <h5> admin@gmail.com</h5>
+                    </div>
+                    <div class="timeline-footer">
+                      <a class="btn btn-primary btn-xs">Read more</a>
+                      <a class="btn btn-danger btn-xs">Delete</a>
+                    </div>
+                  </div>
+                </li>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                
+                <li>
+                  <i class="fa fa-comments bg-yellow"></i>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header"><a href="#">Contact Info:</a> </h3>
+                    <div class="timeline-body">
+                      <h5>Mobile Number : <?php echo $contact." "; ?></h5>
+                      <h5>Adhaar Number : <?php echo $adhaar_number." "; ?></h5>
+                    </div>
+                  </div>
+                </li>
+                <!-- END timeline item -->
+                <!-- timeline time label -->
+
+                <li>
+                  <i class="fa fa-comments bg-green"></i>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header"><a href="#">Address:</a> </h3>
+                    <div class="timeline-body">
+                      <h4><?php echo $address." "; ?></h4>
+                    </div>
+                  </div>
+                </li>
+                <!-- END timeline item -->
+                <!-- timeline time label -->
+               
+                <li>
+                  <i class="fa fa-camera bg-purple"></i>
+                  <div class="timeline-item">
+                    <h3 class="timeline-header"><a href="#"><?php echo $username; ?></a> uploaded new photos</h3>
+                    <div class="timeline-body">
+                      <img src=<?php echo "'../".$photo."'" ?> alt="..." class="margin">
+                    </div>
+                  </div>
+                </li>
+                <!-- END timeline item -->
+                <!-- timeline item -->
+                
+                <!-- END timeline item -->
+                <li>
+                  <i class="fa fa-clock-o bg-gray"></i>
+                </li>
+              </ul>
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+                <!--oprator info goes here -->
+
+
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 

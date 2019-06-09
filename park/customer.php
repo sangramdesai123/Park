@@ -113,7 +113,7 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
@@ -153,14 +153,14 @@ session_start();
               </ul>
             </li>
 
-            <li class="treeview">
+            <li class="active treeview">
               <a href="#">
                 <i class="fa fa-laptop"></i>
                 <span>Customer Info</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="customer.php"><i class="fa fa-circle-o"></i> Customer info</a></li>
+                <li class="active"><a href="customer.php"><i class="fa fa-circle-o"></i> Customer info</a></li>
                 <li><a href="vehical.php"><i class="fa fa-circle-o"></i> Vehical info</a></li>
               </ul>
             </li>
@@ -185,17 +185,12 @@ session_start();
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Create New Map</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> New Oprator</a></li>
+                <li><a href="./newmap.php"><i class="fa fa-circle-o"></i> Create New Map</a></li>
+                <li><a href="./newoprator.php"><i class="fa fa-circle-o"></i> New Oprator</a></li>
               </ul>
             </li>
             
-            <li>
-              <a href="pages/calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                <small class="label pull-right bg-red">3</small>
-              </a>
-            </li>
+            
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
