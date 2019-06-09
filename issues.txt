@@ -1,0 +1,4 @@
+issues:
+0 entries in month anaylysis
+vehicle enters at last day of month and leaves next month
+
