@@ -113,22 +113,22 @@ session_start();
           <!-- sidebar menu: : style can be found in sidebar.less -->
           <ul class="sidebar-menu">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active treeview">
+            <li class="treeview">
               <a href="#">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span> <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li class="active"><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
+                <li><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
               </ul>
             </li>
-            <li class="treeview">
+            <li class="active  treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Booking</span><i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Slots Status</a></li>
-                <li><a href="booking.php"><i class="fa fa-circle-o"></i> Booking Status</a></li>
+                <li ><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Slots Status</a></li>
+                <li class="active"><a href="booking.php"><i class="fa fa-circle-o"></i> Booking Status</a></li>
               </ul>
             </li>
             <li class="treeview">
@@ -172,10 +172,7 @@ session_start();
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="pages/charts/Analysis.php"><i class="fa fa-circle-o"></i> Analysis</a></li>
               </ul>
             </li>
       
@@ -185,17 +182,12 @@ session_start();
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Create New Map</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> New Oprator</a></li>
+                <li><a href="./newmap.php"><i class="fa fa-circle-o"></i> Create New Map</a></li>
+                <li><a href="./newoprator.php"><i class="fa fa-circle-o"></i> New Oprator</a></li>
               </ul>
             </li>
             
-            <li>
-              <a href="pages/calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                <small class="label pull-right bg-red">3</small>
-              </a>
-            </li>
+            
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>

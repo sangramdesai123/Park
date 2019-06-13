@@ -1,6 +1,27 @@
 <?php
     session_start();
     include_once("../config/config.php");
+    if(isset($_GET['username'])){
+      $username=$_GET['username'];
+      $password=$_GET['password'];
+      $firstname=$_GET['firstname'];
+      $lastname=$_GET['lastname'];
+      $contact=$_GET['contact'];
+      $adhaarnumber=$_GET['adhaarnumber'];
+      $address=$_GET['address'];
+      $query="INSERT INTO `admin` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `password`) VALUES ('$username','$firstname','$lastname','$contact','$address','$adhaarnumber','$password')";
+      
+      $result=mysqli_query($con,$query);
+      header("Location:./newoprator.php?msg=success");
+      exit();
+    }
+    if (isset($_GET['msg'])) {
+        if ($_GET['msg']=="success") {
+          echo "<script>alert('New User is Added successfully')</script>";
+        }else{
+          echo "<script>alert('Something is wrong')</script>";
+        }
+    }
 ?>                  
 <!DOCTYPE html>
 <html>
@@ -121,7 +142,7 @@
                 <li><a href="index.php"><i class="fa fa-circle-o"></i>Main Dashboard</a></li>
               </ul>
             </li>
-            <li class="active treeview">
+            <li class=" treeview">
               <a href="#">
                 <i class="fa fa-files-o"></i>
                 <span>Booking</span><i class="fa fa-angle-left pull-right"></i>
@@ -179,7 +200,7 @@
               </ul>
             </li>
       
-            <li class="treeview">
+            <li class="active treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Forms</span>
                 <i class="fa fa-angle-left pull-right"></i>
@@ -203,7 +224,7 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Slot Status Data
+            Add New Oprator
           </h1>
           <ol class="breadcrumb">
             <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
@@ -216,41 +237,75 @@
           <div class="row">
             <div class="col-xs-12">
               <div class="box">
-                <div class="box-header">
-                  <h3 class="box-title">Slot info table</h3>
-                </div><!-- /.box-header -->
                 <div class="box-body">
-                  <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th>Level</th>
-                        <th>Slot</th>
-                        <th>Booking Id</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      
-                      <?php
-                        $query="select * from slot_status";
-                        $result=mysqli_query($con,$query);
-                        while($row=mysqli_fetch_array($result)){
-                        echo '
-                          <tr>
-                            <td>'.$row['level_number'].'</td>
-                            <td>'.$row['slot_number'].'</td>
-                            <td>'.$row['booking_id'].'</td>
-                            <td>'.$row['status'].'</td>
-                          </tr>
+                <div class="col-md-2"></div>
+                  <div class="col-md-8">
+              <!-- Horizontal Form -->
+              <div class="box box-info">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Fill This Form</h3>
+                </div><!-- /.box-header -->
+                <!-- form start -->
+                <form class="form-horizontal">
+                  <div class="box-body">
+                    <div class="form-group">
+                      <label for="inputEmail3" class="col-sm-2 control-label">UserName</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control"  name="username" placeholder="text" required>
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                      <div class="col-sm-10">
+                        <input type="password" class="form-control" name="password" placeholder="Password" required>
+                      </div>
+                    </div>
 
-                        ';
-                        }
-                      ?>
-                      
+                 
 
-                      
-                    </tbody>
-                  </table>
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">First Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="firstname" placeholder="first name" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Last Name</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="lastname" placeholder="last name" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Contact</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="contact" placeholder="Contact" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Address</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="address" placeholder="Address" required>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="inputPassword3" class="col-sm-2 control-label">Adhaar Number</label>
+                      <div class="col-sm-10">
+                        <input type="text" class="form-control" name="adhaarnumber" placeholder="Adhaar Number" required>
+                      </div>
+                    </div>
+                  </div><!-- /.box-body -->
+                  <div class="box-footer">
+                    <button type="submit" class="btn btn-danger btn-md">Cancel</button>
+                    <button type="submit" class="btn btn-info pull-right btn-md">Sign in</button>
+                  </div><!-- /.box-footer -->
+                </form>
+              </div><!-- /.box -->
+              
+            </div><!--/.col (right) -->
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
 

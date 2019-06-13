@@ -1,3 +1,7 @@
+<?php 
+session_start(); 
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -55,14 +59,14 @@
               <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                  <span class="hidden-xs">Sangram</span>
+                  <span class="hidden-xs"><?php echo $_SESSION['username']; ?></span>
                 </a>
                 <ul class="dropdown-menu">
                   <!-- User image -->
                   <li class="user-header">
                     <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                     <p>
-                      Sangram
+                      <?php echo $_SESSION['username']; ?>
                     </p>
                   </li>
                   <!-- Menu Footer-->
@@ -95,7 +99,7 @@
               <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
-              <p>Sangram</p>
+              <p><?php echo $_SESSION['username']; ?></p>
               <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
             </div>
           </div>
@@ -184,17 +188,12 @@
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> Create New Map</a></li>
-                <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> New Oprator</a></li>
+                <li><a href="./newmap.php"><i class="fa fa-circle-o"></i> Create New Map</a></li>
+                <li><a href="./newoprator.php"><i class="fa fa-circle-o"></i> New Oprator</a></li>
               </ul>
             </li>
             
-            <li>
-              <a href="pages/calendar.html">
-                <i class="fa fa-calendar"></i> <span>Calendar</span>
-                <small class="label pull-right bg-red">3</small>
-              </a>
-            </li>
+           
             <li class="header">LABELS</li>
             <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
             <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
