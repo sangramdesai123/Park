@@ -1,4 +1,8 @@
 issues:
 0 entries in month anaylysis
 vehicle enters at last day of month and leaves next month
+optimize live status coz each time it has to querry server for getting number of slots and spatial information
+row * column calculations remaining in seatchart
+
+
 

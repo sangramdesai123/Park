@@ -7,7 +7,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Cidco Parking  | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -23,6 +23,8 @@ session_start();
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="./dist/css/seatchart.css">
+    <script type="text/javascript" src="./dist/js/seatchart.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -262,6 +264,38 @@ session_start();
             </div><!-- /.col -->
           </div><!-- /.row -->
 
+
+
+            <div class="row">
+            <div class="col-md-12">
+              <div class="box">
+                <div class="box-header with-border">
+                  <h3 class="box-title"><strong>Live Status of slots</strong></h3>
+                  
+                    <div id="seatmaps">
+                    </div>
+                    
+                     
+                      
+                 
+                       
+                      
+                    </div>
+                   
+                     
+
+
+
+                  </div>
+                </div><!-- /.box-header -->
+                </div><!-- ./box-body -->
+                 </div><!-- /.box-footer -->
+              </div><!-- /.box -->
+            </div><!-- /.col -->
+          </div><!-- /.row -->
+
+
+
           <div class="row">
             <div class="col-md-12">
               <div class="box">
@@ -363,6 +397,11 @@ session_start();
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
+          
+   
+
+
+
 
         </section><!-- /.content -->
       </div><!-- /.content-wrapper -->
@@ -378,6 +417,127 @@ session_start();
 
     </div><!-- ./wrapper -->
 
+
+     <!-- seatChart.js -->
+     
+
+
+    <script >
+
+      
+      var xmlhttp2 = new XMLHttpRequest();
+      var parking_info = [];
+
+      xmlhttp2.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("reached inside for getting parking infor");
+
+          parking_info = JSON.parse(this.responseText);
+          console.log(parking_info);
+          var baksa=document.getElementById('seatmaps');
+          for(var x=0;x<parking_info.length;++x){
+           var map_el= document.createElement("div");
+           var leg_el= document.createElement("div");
+           map_el.setAttribute("id","map"+(x+1));
+           leg_el.setAttribute("id","leg"+(x+1));
+           baksa.appendChild(map_el);
+           baksa.appendChild(leg_el);
+          }
+
+
+
+
+        } else {
+          console.log("Eror in request to server for querries in parking");
+        }
+
+      }
+  xmlhttp2.open("GET", "./queries/parking_info.php", true);
+  xmlhttp2.send();
+
+     
+
+
+
+     var xmlhttp = new XMLHttpRequest();
+
+
+     xmlhttp.onreadystatechange = function(){
+
+       if (this.readyState == 4 && this.status == 200) {
+         console.log("reached inside for getting live status");
+
+         var live_status = JSON.parse(this.responseText);
+         console.log(live_status);
+
+    // Reserved and disabled seats are indexed
+    // from left to right by starting from 0.
+    // Given the seatmap as a 2D array and an index [R, C]
+    // the following values can obtained as follow:
+    // I = cols * R + C
+    var sel={};
+    for(var x=1;x<=parking_info.length;++x) sel[x]=[];  
+    for(var x=0;x<live_status.length;x++){
+      var entry=live_status[x];
+      sel[entry["level_number"]].push(entry['slot_number']);
+
+    }
+    
+    for(var x=0;x<parking_info.length;++x){
+
+      var entry=parking_info[x];
+      
+      console.log("giw "+sel[entry["level_number"]]);
+      var map = {
+        rows: 3,
+        cols: 20,
+        // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
+        //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
+        //disabled: [0, 8],
+        //disabledRows: [4],
+        //disabledCols: [4]
+    };
+
+    var types = [
+        { type: "booked", color: "green", price:0, selected: sel[entry["level_number"]] },
+        
+        
+    ];
+    //console.log(types);
+
+
+    var sc = new Seatchart(map, types,entry["level_number"]);
+    //sc.setAssetsSrc("/path/to/assets");
+
+    // (1) Create functions
+    sc.createMap("map"+entry["level_number"]);
+    //console.log("map"+entry["level_number"]);
+    sc.createLegend("leg"+entry["level_number"]); // optional
+
+   
+
+
+
+
+
+    }
+    
+   
+         
+       }
+         
+        else {
+         console.log("Eror in request to server for querries in live status");
+       }
+      }
+     xmlhttp.open("GET", "./queries/live_status.php", true);
+     xmlhttp.send();
+
+
+</script>
+
+    
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->

@@ -17,7 +17,7 @@ if (mysqli_num_rows($result) > 0) {
   echo json_encode($json_array);
 
 } else {
-  echo "0 results";
+  echo "0 results from booking_json";
 }
 
 ?>
