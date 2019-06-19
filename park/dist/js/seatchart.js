@@ -4,14 +4,18 @@
  * @param {Object.<{rows: number, cols: number, reserved: Array.<number>, disabled: Array.<number>, disabledRows: Array.<number>, disabledCols: Array.<number>}>} seatMap - Info to generate the seatmap.
  * @param {Array.<Object.<{type: string, color: string, price: number, selected: Array.<number>}>>} seatTypes - Seat types and their colors to be represented.
  */
-var level=0;
-function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-vars
+
+function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable-line no-unused-vars
     /**
      * .NET equivalent of string.Format() method
      * @returns {string} The formatted string.
      * @private
      */
-    level=lvl;
+    
+    
+    //console.log("adsada "+level);
+    //console.log(types);
+
     String.prototype.format = function format() {
         var args = arguments;
         return this.replace(/{(\d+)}/g, function replace(match, number) {
@@ -810,7 +814,7 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
      * @private
      */
     var cnt=1;
-    var createSeat = function createSeat(type, content, seatId) {
+    var createSeat = function createSeat(type, content, seatId,containerId) {
         var seat = document.createElement('div');
         if(type == 'available') {
             seat.textContent = cnt++;
@@ -822,7 +826,10 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
 
         // if seatId wasn't passed as argument then don't set it
         if (seatId !== undefined) {
-            seat.setAttribute('id', seatId);
+            seat.setAttribute('id', containerId+""+seatId);
+            
+             
+            
 
             // add click event just if it's a real seats (when it has and id)
             //seat.addEventListener('click', seatClick);
@@ -843,9 +850,9 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
         row.className = 'seatChart-row';
 
         if (rowIndex === undefined) {
-            row.appendChild(createSeat('blank', ''));
+            row.appendChild(createSeat('blank', '',"row_blank"));
         } else {
-            row.appendChild(createSeat('index', rowIndex));
+            row.appendChild(createSeat('index', rowIndex,'row'));
         }
 
         return row;
@@ -861,7 +868,7 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
 
         // set the perfect width of the front indicator
         var front = document.createElement('div');
-        front.textContent = 'Level '+level;
+        front.textContent = 'Level '+lvl;
         front.className = 'seatChart-front';
         header.appendChild(front);
 
@@ -873,11 +880,11 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
      * @returns {HTMLDivElement} The column indexes.
      * @private
      */
-    var createColumnsIndex = function createColumnsIndex() {
+    var createColumnsIndex = function createColumnsIndex(containerId) {
         var columnsIndex = createRow();
 
         for (var i = 1; i <= seatMap.cols; i += 1) {
-            columnsIndex.appendChild(createSeat('index', i));
+            columnsIndex.appendChild(createSeat('index', i,containerId));
         }
 
         return columnsIndex;
@@ -966,7 +973,24 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
      * Selects seats given with seat types.
      * @private
      */
-    var preselectSeats = function preselectSeats() {
+    var preselectSeats = function preselectSeats(containerId) {
+
+        var cust_info={};
+        for(var x=0;x<live_status_info.length;++x){
+            if(live_status_info[x]['level_number']==lvl){
+                var sn= live_status_info[x]['slot_number'];
+                cust_info[sn]={};
+                cust_info[sn]["first_name"]=live_status_info[x]['first_name'];
+                cust_info[sn]["last_name"]=live_status_info[x]['last_name'];
+                cust_info[sn]['slot_number']=live_status_info[x]['slot_number'];
+                cust_info[sn]['username']=live_status_info[x]['username'];
+                cust_info[sn]['booking_id']=live_status_info[x]['booking_id'];
+            }
+        }
+
+
+
+
         for (var n = 0; n < seatTypes.length; n += 1) {
             var seatType = seatTypes[n];
 
@@ -974,9 +998,12 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
                 var type = seatType.type;
                 var color = seatType.color;
 
+               
                 for (var l = 0; l < seatType.selected.length; l += 1) {
                     var index = seatType.selected[l];
-                    var id = '{0}_{1}'.format(Math.floor(index / seatMap.cols), index % seatMap.cols);
+                    var id = containerId+'{0}_{1}'.format(Math.floor(index / seatMap.cols), index % seatMap.cols);
+                    
+                 
 
                     var element = document.getElementById(id);
                     if (element) {
@@ -985,6 +1012,14 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
                         element.classList.add(type);
                         element.classList.add('clicked');
                         element.style.backgroundColor = color;
+                        element.style.position='relative'
+                        element.style.zIndex=10;
+
+
+                    var userData="Name: "+ cust_info[index+1]['first_name']+" "+cust_info[index+1]['last_name']+" Username: "+cust_info[index+1]['username']+"\nBooking id: "+cust_info[index+1]['booking_id'];
+                    
+                    element.setAttribute("data-tooltip",userData);
+                    element.setAttribute("data-tooltip-location","bottom");
                     }
                 }
             }
@@ -1334,7 +1369,7 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
         // add header to container
         seatMapContainer.appendChild(createFrontHeader());
         // add columns index to container
-        seatMapContainer.appendChild(createColumnsIndex());
+        seatMapContainer.appendChild(createColumnsIndex(containerId));
 
         // add rows containing seats
         for (var i = 0; i < seatMap.rows; i += 1) {
@@ -1342,7 +1377,7 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
             var row = createRow(rowIndex);
 
             for (var j = 0; j < seatMap.cols; j += 1) {
-                row.appendChild(createSeat('available', rowIndex + (j + 1), i + '_' + j));
+                row.appendChild(createSeat('available', rowIndex + (j + 1), i + '_' + j,containerId));
             }
 
             seatMapContainer.appendChild(row);
@@ -1390,7 +1425,7 @@ function Seatchart(seatMap, seatTypes, lvl) { // eslint-disable-line no-unused-v
 
         setSeat('reserved');
         setSeat('disabled');
-        preselectSeats();
+        preselectSeats(containerId);
     };
 
     /**

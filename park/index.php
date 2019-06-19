@@ -177,10 +177,10 @@ session_start();
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="Analysis.php"><i class="fa fa-circle-o"></i> Charts</a></li>
+                
+                
+                
               </ul>
             </li>
       
@@ -226,8 +226,8 @@ session_start();
               <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Total Traffic</span>
-                  <span class="info-box-number">90<small>%</small></span>
+                  <span class="info-box-text"><strong>Live Customer <br> count<strong></span>
+                  <span class="info-box-number" id='cust_cnt'>90<small>%</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -235,8 +235,8 @@ session_start();
               <div class="info-box">
                 <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text" >Avgerage Parking<br> Time</span>
+                  <span class="info-box-number" id="avg_park" >41,410</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -248,8 +248,8 @@ session_start();
               <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Revenue</span>
-                  <span class="info-box-number">760 rs</span>
+                  <span class="info-box-text" >Revenue</span>
+                  <span class="info-box-number"id='revenue'>760 rs</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -257,8 +257,8 @@ session_start();
               <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-text" >Unique<br>customers</span>
+                  <span class="info-box-number"id="unique_cust">2,000</span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -296,114 +296,14 @@ session_start();
 
 
 
-          <div class="row">
-            <div class="col-md-12">
-              <div class="box">
-                <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
-                    </div>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
-                  </div>
-                </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                      </p>
-                      <div class="chart">
-                        <!-- Sales Chart Canvas -->
-                        <canvas id="salesChart" style="height: 180px;"></canvas>
-                      </div><!-- /.chart-responsive -->
-                    </div><!-- /.col -->
-                    <div class="col-md-4">
-                      <p class="text-center">
-                        <strong>Goal Completion</strong>
-                      </p>
-                      <div class="progress-group">
-                        <span class="progress-text">Add Products to Cart</span>
-                        <span class="progress-number"><b>160</b>/200</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Complete Purchase</span>
-                        <span class="progress-number"><b>310</b>/400</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
-                        <span class="progress-number"><b>480</b>/800</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Send Inquiries</span>
-                        <span class="progress-number"><b>250</b>/500</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
-                </div><!-- ./box-body -->
-                <div class="box-footer">
-                  <div class="row">
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                        <h5 class="description-header">$35,210.43</h5>
-                        <span class="description-text">TOTAL REVENUE</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                        <h5 class="description-header">$10,390.90</h5>
-                        <span class="description-text">TOTAL COST</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                        <h5 class="description-header">$24,813.53</h5>
-                        <span class="description-text">TOTAL PROFIT</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block">
-                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
-                        <span class="description-text">GOAL COMPLETIONS</span>
-                      </div><!-- /.description-block -->
-                    </div>
-                  </div><!-- /.row -->
-                </div><!-- /.box-footer -->
-              </div><!-- /.box -->
-            </div><!-- /.col -->
-          </div><!-- /.row -->
+          
           
    
 
 
 
 
-        </section><!-- /.content -->
+        </section><!-- /.content -->    
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer">
@@ -417,8 +317,44 @@ session_start();
 
     </div><!-- ./wrapper -->
 
+      <!-- Dashboad Anayltics -->
+     <script>
+             var xmlhttp = new XMLHttpRequest();
 
-     <!-- seatChart.js -->
+
+             xmlhttp.onreadystatechange = function () {
+
+               if (this.readyState == 4 && this.status == 200) {
+                 console.log("reached");
+
+                 var analytics = JSON.parse(this.responseText);
+                 console.log("analytics");
+                 console.log(analytics);
+                
+                 
+                  
+                document.getElementById("cust_cnt").textContent=analytics[0]["customer_count"];
+                document.getElementById("avg_park").textContent=analytics[1]["avg_park_time"]+" mins";
+                console.log("setting with "+analytics["revenue"]);
+                document.getElementById("revenue").textContent="Rs "+analytics[2]["revenue"];
+                document.getElementById("unique_cust").textContent=analytics[3]["unique_cust"];
+
+
+
+                
+
+
+
+               } else {
+                 console.log("Eror in request to server for querries");
+               }
+             }
+             xmlhttp.open("GET", "./queries/dashboard_querry.php", true);
+             xmlhttp.send();
+
+
+
+      </script>
      
 
 
@@ -479,16 +415,21 @@ session_start();
     var sel={};
     for(var x=1;x<=parking_info.length;++x) sel[x]=[];  
     for(var x=0;x<live_status.length;x++){
-      var entry=live_status[x];
-      sel[entry["level_number"]].push(entry['slot_number']);
+     // var entry=live_status[x];
+     //0 indexed slots 
+      sel[live_status[x]["level_number"]].push(live_status[x]['slot_number']-1);
 
     }
+    console.log("sel");
+    console.log(sel);
+
+    var ans=[];
     
     for(var x=0;x<parking_info.length;++x){
 
-      var entry=parking_info[x];
+     // var entry=parking_info[x];
       
-      console.log("giw "+sel[entry["level_number"]]);
+      //console.log("giw "+sel[entry["level_number"]]);
       var map = {
         rows: 3,
         cols: 20,
@@ -499,29 +440,36 @@ session_start();
         //disabledCols: [4]
     };
 
-    var types = [
-        { type: "booked", color: "green", price:0, selected: sel[entry["level_number"]] },
-        
-        
-    ];
+    var types = new Array();
+    types = [{
+      type: "booked",
+      color: "green",
+      price: 0,
+      selected: sel[parking_info[x]["level_number"]]
+    }, ];
+
+
+    //console.log("types");
     //console.log(types);
-
-
-    var sc = new Seatchart(map, types,entry["level_number"]);
+    // var sc = new Seatchart(map, types,entry["level_number"]);
     //sc.setAssetsSrc("/path/to/assets");
-
-    // (1) Create functions
-    sc.createMap("map"+entry["level_number"]);
-    //console.log("map"+entry["level_number"]);
-    sc.createLegend("leg"+entry["level_number"]); // optional
-
+    console.log("live status");
+    console.log(live_status);
+    ans.push([parking_info[x]["level_number"],new Seatchart(map, types,parking_info[x]["level_number"],live_status)]); 
    
 
-
-
-
-
     }
+    
+
+    //console.log(ans);
+    for(var x=0;x<ans.length;++x){
+      //var p = ans[x];
+      ans[x][1].createMap("map"+ans[x][0]);
+      ans[x][1].createLegend("leg"+ans[x][0]);
+      //if (x==1  ) break;
+        
+    }
+
     
    
          

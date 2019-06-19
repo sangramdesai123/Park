@@ -1,0 +1,49 @@
+<html>
+ <head>
+        <link rel="stylesheet" href="./dist/css/seatchart.css">
+        <script type="text/javascript" src="./dist/js/seatchart.js"></script>
+    
+ </head>  
+ <body>
+        <div id="map1"></div>
+        <div id="leg1"></div>
+        
+        <div id="map2"></div>
+        <div id="leg2"></div>
+
+ </body>
+ <script>
+        // Reserved and disabled seats are indexed
+        // from left to right by starting from 0.
+        // Given the seatmap as a 2D array and an index [R, C]
+        // the following values can obtained as follow:
+        // I = cols * R + C
+
+        var sel={0:[2,3,4],1:[6,7,8]};
+        for (var x=0;x<2;++x){
+        var map = {
+            rows: 9,
+            cols: 9,
+            // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
+            //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
+            //disabled: [0, 8],
+            //disabledRows: [4],
+            //disabledCols: [4]
+        };
+    
+        var types = [
+            { type: "regular", color: "orange", price: 10, selected: sel[x] },
+            
+            
+        ];
+    
+        var sc = new Seatchart(map, types,(x+1));
+        //sc.setAssetsSrc("/path/to/assets");
+    
+        // (1) Create functions
+        sc.createMap("map"+(x+1));
+        sc.createLegend("leg"+(x+1)); // optional
+        //sc.createShoppingCart("shoppingCart-container"); // optional
+    }
+    </script> 
+</html>
