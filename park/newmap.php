@@ -341,7 +341,7 @@ session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.
     <!-- ChartJS 1.0.1 -->
     <script src="plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard2.js"></script>
+    
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
   </body>

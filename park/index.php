@@ -25,6 +25,7 @@ session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
     <link rel="stylesheet" href="./dist/css/seatchart.css">
+    <link rel="shortcut icon" href="#" />
     <script type="text/javascript" src="./dist/js/seatchart.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -527,7 +528,7 @@ session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.
     <!-- ChartJS 1.0.1 -->
     <script src="plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard2.js"></script>
+    
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
   </body>
