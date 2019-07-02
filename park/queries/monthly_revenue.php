@@ -1,10 +1,8 @@
 <?php 
 include_once("../../config/config.php");
-session_start();
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); }
 
-$sql = "SELECT monthname(date(entry_time)) as month ,sum(total_fare)as revenue from booking group by month(entry_time)";
-
-
+$sql = "SELECT monthname(date(entry_time)) as month ,sum(total_fare)as revenue,month(date(entry_time)) as mn from booking group by monthname(date(entry_time)),month(date(entry_time))\n". "order by mn";
 
 $result=mysqli_query($con,$sql);
 

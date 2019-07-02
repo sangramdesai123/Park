@@ -974,8 +974,11 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
      * @private
      */
     var preselectSeats = function preselectSeats(containerId) {
-
+       
+        
         var cust_info={};
+
+        if(live_status_info != null) {        
         for(var x=0;x<live_status_info.length;++x){
             if(live_status_info[x]['level_number']==lvl){
                 var sn= live_status_info[x]['slot_number'];
@@ -987,6 +990,10 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
                 cust_info[sn]['booking_id']=live_status_info[x]['booking_id'];
             }
         }
+    }
+        
+        
+    
 
 
 
@@ -1015,16 +1022,19 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
                         element.style.position='relative'
                         element.style.zIndex=10;
 
-
-                    var userData="Name: "+ cust_info[index+1]['first_name']+" "+cust_info[index+1]['last_name']+" Username: "+cust_info[index+1]['username']+"\nBooking id: "+cust_info[index+1]['booking_id'];
-                    
-                    element.setAttribute("data-tooltip",userData);
-                    element.setAttribute("data-tooltip-location","bottom");
+                    if(live_status_info!=null){
+                        var userData="Name: "+ cust_info[index+1]['first_name']+" "+cust_info[index+1]['last_name']+" Username: "+cust_info[index+1]['username']+"\nBooking id: "+cust_info[index+1]['booking_id'];
+                        
+                        element.setAttribute("data-tooltip",userData);
+                        element.setAttribute("data-tooltip-location","bottom");
+                    }
                     }
                 }
             }
         }
-    };
+    
+    }
+    ;
 
     /**
      * Gets the price for a specific type of seat.
@@ -1425,7 +1435,11 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
 
         setSeat('reserved');
         setSeat('disabled');
+
+
         preselectSeats(containerId);
+        
+        }
     };
 
     /**
@@ -1631,4 +1645,4 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
         var container = document.getElementById(containerId);
         container.appendChild(shoppingCartContainer);
     };
-}
+

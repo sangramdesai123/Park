@@ -1,11 +1,9 @@
 issues:
-0 entries in month anaylysis
+
 vehicle enters at last day of month and leaves next month
-optimize live status coz each time it has to querry server for getting number of slots and spatial information
-row * column calculations remaining in seatchart
-diabled seats for remainder of perfect quotient 
-typos in sangrams webpages
-new sidebar updatations in all pages
+row * column calculations remaining in seatchart diabled seats for remainder of perfect quotient 
+adding  current year in all quries
+legend remaining for some charts
 
 
 

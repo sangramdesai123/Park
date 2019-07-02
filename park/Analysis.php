@@ -1,6 +1,13 @@
 <?php
-session_start();
-   include_once("../config/config.php");
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); }
+include_once("../config/config.php");
+
+if(!isset($_SESSION['username'])){
+  header("Location: ../login.php");
+  exit();
+}
+
+
 ?>                  
 <!DOCTYPE html>
 <html>
@@ -251,7 +258,7 @@ session_start();
               <!-- LINE CHART -->
               <div class="box box-info">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Line Chart</h3>
+                  <h3 class="box-title">Customers count weekly basis in month</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -259,7 +266,7 @@ session_start();
                 </div>
                 <div class="box-body">
                   <div class="chart">
-                    <canvas id="lineChart" style="height:250px"></canvas>
+                    <canvas id="lineChart" style="height:280px"></canvas>
                   </div>
                 </div><!-- /.box-body -->
               </div><!-- /.box -->
@@ -267,7 +274,7 @@ session_start();
               <!-- BAR CHART -->
               <div class="box box-success">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Revenue</h3>
+                  <h3 class="box-title" id="mr" >Monthly Revenue</h3>
                   <div class="box-tools pull-right">
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
                     <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -347,8 +354,8 @@ session_start();
 
               {
                 label: "Daily customer count",
-                fillColor: "rgba(20,141,188,0.9)",
-                strokeColor: "rgba(90,141,188,0.8)",
+                fillColor: "rgba(148, 0, 211,0.49)",
+                strokeColor: "rgba(148, 0, 211,0.49)",
                 pointColor: "#3b8bba",
                 pointStrokeColor: "rgba(60,141,188,1)",
                 pointHighlightFill: "#fff",
@@ -362,9 +369,9 @@ session_start();
             //Boolean - If we should show the scale at all
             showScale: true,
             //Boolean - Whether grid lines are shown across the chart
-            scaleShowGridLines: false,
+            scaleShowGridLines: true,
             //String - Colour of the grid lines
-            scaleGridLineColor: "rgba(0,0,0,.05)",
+            scaleGridLineColor: "rgba(0,0,0,.07)",
             //Number - Width of the grid lines
             scaleGridLineWidth: 1,
             //Boolean - Whether to show horizontal lines (except X axis)
@@ -376,7 +383,7 @@ session_start();
             //Number - Tension of the bezier curve between points
             bezierCurveTension: 0.3,
             //Boolean - Whether to show a dot for each point
-            pointDot: false,
+            pointDot: true,
             //Number - Radius of each point dot in pixels
             pointDotRadius: 4,
             //Number - Pixel width of point dot stroke
@@ -400,15 +407,6 @@ session_start();
           //Create the line chart
           areaChart.Line(areaChartData, areaChartOptions);
 
-          // -------------
-          // - LINE CHART -
-          // --------------
-          var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
-          var lineChart = new Chart(lineChartCanvas);
-          var lineChartOptions = areaChartOptions;
-          lineChartOptions.datasetFill = false;
-          lineChart.Line(areaChartData, lineChartOptions);
-
 
 
 
@@ -424,7 +422,7 @@ session_start();
 
       //Pie  chart
 
-        var xmlhttp = new XMLHttpRequest();
+var xmlhttp = new XMLHttpRequest();
 
 
 xmlhttp.onreadystatechange = function () {
@@ -474,8 +472,8 @@ xmlhttp.onreadystatechange = function () {
           },
           {
             value: 0,
-            color: "##CE5B78",
-            highlight: "#CE5B78",
+            color: "#FF69B4",
+            highlight: "#FF69B4",
             label: "June"
           },
           {
@@ -519,7 +517,12 @@ xmlhttp.onreadystatechange = function () {
 
         for (var x=0;x<user_count_by_month.length;++x){
           var entry = user_count_by_month[x];
-          PieData[x]['value']=entry['cnt'];
+          for(var y=0;y<PieData.length;++y){
+            if(PieData[y]['label']==entry['month']){
+              PieData[y]['value']=entry['cnt'];
+            }
+          }
+          
           
 
         }
@@ -539,7 +542,7 @@ xmlhttp.onreadystatechange = function () {
           //Boolean - Whether we animate the rotation of the Doughnut
           animateRotate: true,
           //Boolean - Whether we animate scaling the Doughnut from the centre
-          animateScale: false,
+          animateScale: true,
           //Boolean - whether to make the chart responsive to window resizing
           responsive: true,
           // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
@@ -591,15 +594,17 @@ xmlhttp.onreadystatechange = function () {
           }
 
 
-        
+          var ddd = new Date();
+          var nnn = ddd.getFullYear();
+          document.getElementById("mr").innerHTML = "Monthly Revenue "+nnn;
         var barChartData = {
             labels: timelabel,
             datasets: [
 
               {
-                label: "Monthly Revenue",
-                fillColor: "rgba(20,141,188,0.9)",
-                strokeColor: "rgba(90,141,188,0.8)",
+                label: "Monthly Revenue "+nnn,
+                fillColor: "rgba(0, 0, 255,0.49)",
+                strokeColor: "rgba(0, 0, 255,0.48)",
                 pointColor: "#3b8bba",
                 pointStrokeColor: "rgba(60,141,188,1)",
                 pointHighlightFill: "#fff",
@@ -639,7 +644,7 @@ xmlhttp.onreadystatechange = function () {
           maintainAspectRatio: true
         };
 
-        barChartOptions.datasetFill = false;
+        barChartOptions.datasetFill = true;
         barChart.Bar(barChartData, barChartOptions);
 
 
@@ -655,6 +660,177 @@ xmlhttp.onreadystatechange = function () {
 }
 xmlhttp.open("GET", "./queries/monthly_revenue.php", true);
 xmlhttp.send();
+
+
+//line chart
+
+var xmlhttp2 = new XMLHttpRequest();
+
+var weekdays = new Array(7);
+        weekdays[0] = "Sunday";
+        weekdays[1] = "Monday";
+        weekdays[2] = "Tuesday";
+        weekdays[3] = "Wednesday";
+        weekdays[4] = "Thursday";
+        weekdays[5] = "Friday";
+        weekdays[6] = "Saturday";
+
+
+xmlhttp2.onreadystatechange = function(){
+
+  if (this.readyState == 4 && this.status == 200) {
+    console.log("reached inside for getting weekly infor");
+
+    var weekly_resonse = JSON.parse(this.responseText);
+    console.log(weekly_resonse);
+    var weekwise_sort  = [[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0],[0,0,0,0,0,0,0]];
+    for(var i=0;i<weekly_resonse.length;++i){
+      var dd= new Date(weekly_resonse[i]["date"]);
+      var w=Math.floor(dd.getDate()/7);
+      var dw=dd.getDay();
+      weekwise_sort[w][dw]+=Number(weekly_resonse[i]["cnt"])
+
+    }
+    console.log("weekly analysis");
+    console.log(weekwise_sort);
+
+
+          // -------------
+          // - LINE CHART -
+          // --------------
+
+
+var ds=[
+{
+  label: "Week 1",
+  fillColor: "rgba(148, 0, 211,0.49)",
+  lineColor: "rgba(148, 0, 211,0.49)",
+  strokeColor: "rgba(148, 0, 211,0.49)",
+  pointColor: "#3b8bba",
+  pointStrokeColor: "rgba(60,141,188,1)",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(60,141,188,1)",
+  data: weekwise_sort[0]
+  
+},
+{
+  label: "Week 2",
+  fillColor: "rgba(0, 255, 0,0.49)",
+  lineColor: "rgba(0, 255, 0,0.49)",
+  strokeColor: "rgba(0, 255, 0,0.49)",
+  pointColor: "#3b8bba",
+  pointStrokeColor: "rgba(60,141,188,1)",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(60,141,188,1)",
+  data: weekwise_sort[1]
+},
+{
+  label: "Week 3",
+  fillColor: "rgba(255, 255, 0,0.49)",
+  lineColor: "rgba(255, 255, 0,0.49)",
+  strokeColor: "rgba(255, 255, 0,0.49)",
+  pointColor: "#3b8bba",
+  pointStrokeColor: "rgba(60,141,188,1)",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(60,141,188,1)",
+  data: weekwise_sort[2]
+},
+{
+  label: "Week 4",
+  fillColor: "rgba(255, 127, 0,0.49)",
+  lineColor: "rgba(255, 127, 0,0.49)",
+  strokeColor: "rgba(255, 127, 0,0.49)",
+  pointColor: "#3b8bba",
+  pointStrokeColor: "rgba(60,141,188,1)",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(60,141,188,1)",
+  data: weekwise_sort[3]
+},
+{
+  label: "Week 5",
+  fillColor: "rgba(0, 0, 255,0.49)",
+  lineColor: "rgba(0, 0, 255,0.49)",
+  strokeColor: "rgba(0, 0, 255,0.49)",
+  pointColor: "#3b8bba",
+  pointStrokeColor: "rgba(60,141,188,1)",
+  pointHighlightFill: "#fff",
+  pointHighlightStroke: "rgba(60,141,188,1)",
+  data: weekwise_sort[4]
+}
+];
+
+
+
+          var lineChartOptions = {
+            //Boolean - If we should show the scale at all
+            
+            showScale: true,
+            //Boolean - Whether grid lines are shown across the chart
+            scaleShowGridLines: true,
+            //String - Colour of the grid lines
+            scaleGridLineColor: "rgba(0,0,0,.05)",
+            //Number - Width of the grid lines
+            scaleGridLineWidth: 1,
+            //Boolean - Whether to show horizontal lines (except X axis)
+            scaleShowHorizontalLines: true,
+            //Boolean - Whether to show vertical lines (except Y axis)
+            scaleShowVerticalLines: true,
+            //Boolean - Whether the line is curved between points
+            bezierCurve: true,
+            //Number - Tension of the bezier curve between points
+            bezierCurveTension: 0.4,
+            //Boolean - Whether to show a dot for each point
+            pointDot: true,
+            //Number - Radius of each point dot in pixels
+            pointDotRadius: 4,
+            //Number - Pixel width of point dot stroke
+            pointDotStrokeWidth: 1,
+            //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
+            pointHitDetectionRadius: 20,
+            //Boolean - Whether to show a stroke for datasets
+            datasetStroke: true,
+            //Number - Pixel width of dataset stroke
+            datasetStrokeWidth: 2,
+            //Boolean - Whether to fill the dataset with a color
+            datasetFill: true,
+
+            datasets:ds,
+            //String - A legend template
+            legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].lineColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>",
+            //Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+            maintainAspectRatio: true,
+            //Boolean - whether to make the chart responsive to window resizing
+            responsive: true
+          };
+
+          var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+          var lineChart = new Chart(lineChartCanvas);
+         
+          lineChartOptions.datasetFill = true;
+
+
+         
+
+          var lineChartData = {
+            labels: weekdays,
+            datasets: ds
+          };
+
+
+          lineChart.Line(lineChartData, lineChartOptions);
+
+
+
+
+
+  }
+    
+   else {
+    console.log("Eror in request to server for querries in weekly");
+  }
+ }
+xmlhttp2.open("GET", "./queries/weekly.php", true);
+xmlhttp2.send();
 
 
       

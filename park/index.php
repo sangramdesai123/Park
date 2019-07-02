@@ -1,5 +1,6 @@
 <?php 
-session_start(); 
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); } 
+
 ?>
 
 <!DOCTYPE html>
@@ -136,16 +137,6 @@ session_start();
                 <li><a href="booking.php"><i class="fa fa-circle-o"></i> Booking Status</a></li>
               </ul>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Parking</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Parking Status</a></li>
-                <li><a href="booking.php"><i class="fa fa-circle-o"></i> Live Status</a></li>
-              </ul>
-            </li>
             <li>
             <li class="treeview">
               <a href="#">
@@ -170,17 +161,17 @@ session_start();
               </ul>
             </li>
 
-            <li class="treeview">
+           <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
                 <span>Analysis</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="Analysis.php"><i class="fa fa-circle-o"></i> Charts</a></li>
-                
-                
-                
+                <li><a href="Analysis.php"><i class="fa fa-circle-o"></i>Graphical Data </a></li>
+               
+               
+               
               </ul>
             </li>
       
@@ -224,19 +215,19 @@ session_start();
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text"><strong>Live Customer <br> count<strong></span>
-                  <span class="info-box-number" id='cust_cnt'>90<small>%</small></span>
+                  <span class="info-box-number" id='cust_cnt'><small>%</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-red"><i class="fa fa-clock-o"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text" >Avgerage Parking<br> Time</span>
-                  <span class="info-box-number" id="avg_park" >41,410</span>
+                  <span class="info-box-number" id="avg_park" ></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -246,10 +237,10 @@ session_start();
 
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-inr" aria-hidden="true"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text" >Revenue</span>
-                  <span class="info-box-number"id='revenue'>760 rs</span>
+                  <span class="info-box-number"id='revenue'></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -258,7 +249,7 @@ session_start();
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text" >Unique<br>customers</span>
-                  <span class="info-box-number"id="unique_cust">2,000</span>
+                  <span class="info-box-number"id="unique_cust"></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -332,12 +323,30 @@ session_start();
                  console.log(analytics);
                 
                  
-                  
+                if(analytics[0]["customer_count"]!=null)  
                 document.getElementById("cust_cnt").textContent=analytics[0]["customer_count"];
+                else{
+                  document.getElementById("cust_cnt").textContent="0";
+                }
+
+                if(analytics[1]["avg_park_time"]!=null)
                 document.getElementById("avg_park").textContent=analytics[1]["avg_park_time"]+" mins";
-                console.log("setting with "+analytics["revenue"]);
+                else{
+                  document.getElementById("avg_park").textContent="0";
+                }
+
+                
+                if(analytics[2]["revenue"]!=null)                
                 document.getElementById("revenue").textContent="Rs "+analytics[2]["revenue"];
+                else{
+                document.getElementById("revenue").textContent="Rs 0";
+                }
+
+                if(analytics[3]["unique_cust"]!=null)
                 document.getElementById("unique_cust").textContent=analytics[3]["unique_cust"];
+                else{
+                  document.getElementById("unique_cust").textContent="0";
+                }
 
 
 
@@ -403,9 +412,15 @@ session_start();
 
        if (this.readyState == 4 && this.status == 200) {
          console.log("reached inside for getting live status");
-
-         var live_status = JSON.parse(this.responseText);
+        var live_status;
+        try{
+        live_status = JSON.parse(this.responseText);
          console.log(live_status);
+        }
+        catch(e){
+          live_status=null;
+        }
+
 
     // Reserved and disabled seats are indexed
     // from left to right by starting from 0.
@@ -413,12 +428,16 @@ session_start();
     // the following values can obtained as follow:
     // I = cols * R + C
     var sel={};
-    for(var x=1;x<=parking_info.length;++x) sel[x]=[];  
+    for(var x=1;x<=parking_info.length;++x) sel[x]=new Array();  
+    console.log("sdfsdfdsfs");
+    if(live_status!=null){
+      
     for(var x=0;x<live_status.length;x++){
      // var entry=live_status[x];
      //0 indexed slots 
       sel[live_status[x]["level_number"]].push(live_status[x]['slot_number']-1);
 
+    }
     }
     console.log("sel");
     console.log(sel);
@@ -430,13 +449,16 @@ session_start();
      // var entry=parking_info[x];
       
       //console.log("giw "+sel[entry["level_number"]]);
+    var rr=parking_info[x]["number_of_slots"];
+
+
       var map = {
-        rows: 3,
+        rows: parseInt(rr)/20 ,
         cols: 20,
         // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
         //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
-        //disabled: [0, 8],
-        //disabledRows: [4],
+        //disabled: [4, 8],
+       // disabledRows: [1],
         //disabledCols: [4]
     };
 
@@ -455,8 +477,9 @@ session_start();
     //sc.setAssetsSrc("/path/to/assets");
     console.log("live status");
     console.log(live_status);
+    
     ans.push([parking_info[x]["level_number"],new Seatchart(map, types,parking_info[x]["level_number"],live_status)]); 
-   
+    
 
     }
     
@@ -465,7 +488,7 @@ session_start();
     for(var x=0;x<ans.length;++x){
       //var p = ans[x];
       ans[x][1].createMap("map"+ans[x][0]);
-      ans[x][1].createLegend("leg"+ans[x][0]);
+      //ans[x][1].createLegend("leg"+ans[x][0]);
       //if (x==1  ) break;
         
     }

@@ -1,6 +1,6 @@
 <?php 
 include_once("../../config/config.php");
-session_start();
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); }
 
 $sql = "SELECT username,booking_id,first_name ,last_name,level_number,slot_number FROM normal_user NATURAL JOIN (SELECT booking_id,username,level_number,slot_number from booking NATURAL join slot_status) AS a";
 

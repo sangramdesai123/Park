@@ -1,6 +1,6 @@
 <?php 
 include_once("../../config/config.php");
-session_start();
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); }
 
 $sql = "select monthname(date(entry_time)) as month ,count(entry_time) as cnt from booking GROUP by month(entry_time)";
 
