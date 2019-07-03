@@ -252,7 +252,7 @@
 */
 [data-tooltip] {
     position: relative;
-    z-index: 1000;
+    z-index: 2;
   }
   
   /* Positioning and visibility settings of the tooltip */

@@ -1020,7 +1020,7 @@ function Seatchart(seatMap, seatTypes, lvl,live_status_info) { // eslint-disable
                         element.classList.add('clicked');
                         element.style.backgroundColor = color;
                         element.style.position='relative'
-                        element.style.zIndex=10;
+                        //element.style.zIndex=1;
 
                     if(live_status_info!=null){
                         var userData="Name: "+ cust_info[index+1]['first_name']+" "+cust_info[index+1]['last_name']+" Username: "+cust_info[index+1]['username']+"\nBooking id: "+cust_info[index+1]['booking_id'];

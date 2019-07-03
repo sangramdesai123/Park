@@ -393,6 +393,105 @@ session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.
 
 
 
+          // get request for live_status of slots inside parking_info get status becoz this should happen
+          //after parking_info get request
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+              console.log("reached inside for getting live status");
+              var live_status;
+              try {
+                live_status = JSON.parse(this.responseText);
+                console.log(live_status);
+              } catch (e) {
+                live_status = null;
+              }
+
+
+              // Reserved and disabled seats are indexed
+              // from left to right by starting from 0.
+              // Given the seatmap as a 2D array and an index [R, C]
+              // the following values can obtained as follow:
+              // I = cols * R + C
+              var sel = {};
+              for (var x = 1; x <= parking_info.length; ++x) sel[x] = new Array();
+              console.log("sdfsdfdsfs");
+              if (live_status != null) {
+
+                for (var x = 0; x < live_status.length; x++) {
+                  // var entry=live_status[x];
+                  //0 indexed slots 
+                  sel[live_status[x]["level_number"]].push(live_status[x]['slot_number'] - 1);
+
+                }
+              }
+              console.log("sel");
+              console.log(sel);
+
+              var ans = [];
+
+              for (var x = 0; x < parking_info.length; ++x) {
+
+                // var entry=parking_info[x];
+
+                //console.log("giw "+sel[entry["level_number"]]);
+                var rr = parking_info[x]["number_of_slots"];
+
+
+                var map = {
+                  rows: parseInt(rr) / 20,
+                  cols: 20,
+                  // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
+                  //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
+                  //disabled: [4, 8],
+                  // disabledRows: [1],
+                  //disabledCols: [4]
+                };
+
+                var types = new Array();
+                types = [{
+                  type: "booked",
+                  color: "green",
+                  price: 0,
+                  selected: sel[parking_info[x]["level_number"]]
+                }, ];
+
+
+                //console.log("types");
+                //console.log(types);
+                // var sc = new Seatchart(map, types,entry["level_number"]);
+                //sc.setAssetsSrc("/path/to/assets");
+                console.log("live status");
+                console.log(live_status);
+
+                ans.push([parking_info[x]["level_number"], new Seatchart(map, types, parking_info[x]["level_number"], live_status)]);
+
+
+              }
+
+
+              //console.log(ans);
+              for (var x = 0; x < ans.length; ++x) {
+                //var p = ans[x];
+                ans[x][1].createMap("map" + ans[x][0]);
+                //ans[x][1].createLegend("leg"+ans[x][0]);
+                //if (x==1  ) break;
+
+              }
+
+
+
+
+            } else {
+              console.log("Eror in request to server for querries in live status");
+            }
+          }
+          xmlhttp.open("GET", "./queries/live_status.php", true);
+          xmlhttp.send();
+
+
+
 
         } else {
           console.log("Eror in request to server for querries in parking");
@@ -404,107 +503,6 @@ session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.
 
      
 
-
-
-     var xmlhttp = new XMLHttpRequest();
-
-
-     xmlhttp.onreadystatechange = function(){
-
-       if (this.readyState == 4 && this.status == 200) {
-         console.log("reached inside for getting live status");
-        var live_status;
-        try{
-        live_status = JSON.parse(this.responseText);
-         console.log(live_status);
-        }
-        catch(e){
-          live_status=null;
-        }
-
-
-    // Reserved and disabled seats are indexed
-    // from left to right by starting from 0.
-    // Given the seatmap as a 2D array and an index [R, C]
-    // the following values can obtained as follow:
-    // I = cols * R + C
-    var sel={};
-    for(var x=1;x<=parking_info.length;++x) sel[x]=new Array();  
-    console.log("sdfsdfdsfs");
-    if(live_status!=null){
-      
-    for(var x=0;x<live_status.length;x++){
-     // var entry=live_status[x];
-     //0 indexed slots 
-      sel[live_status[x]["level_number"]].push(live_status[x]['slot_number']-1);
-
-    }
-    }
-    console.log("sel");
-    console.log(sel);
-
-    var ans=[];
-    
-    for(var x=0;x<parking_info.length;++x){
-
-     // var entry=parking_info[x];
-      
-      //console.log("giw "+sel[entry["level_number"]]);
-    var rr=parking_info[x]["number_of_slots"];
-
-
-      var map = {
-        rows: parseInt(rr)/20 ,
-        cols: 20,
-        // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
-        //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
-        //disabled: [4, 8],
-       // disabledRows: [1],
-        //disabledCols: [4]
-    };
-
-    var types = new Array();
-    types = [{
-      type: "booked",
-      color: "green",
-      price: 0,
-      selected: sel[parking_info[x]["level_number"]]
-    }, ];
-
-
-    //console.log("types");
-    //console.log(types);
-    // var sc = new Seatchart(map, types,entry["level_number"]);
-    //sc.setAssetsSrc("/path/to/assets");
-    console.log("live status");
-    console.log(live_status);
-    
-    ans.push([parking_info[x]["level_number"],new Seatchart(map, types,parking_info[x]["level_number"],live_status)]); 
-    
-
-    }
-    
-
-    //console.log(ans);
-    for(var x=0;x<ans.length;++x){
-      //var p = ans[x];
-      ans[x][1].createMap("map"+ans[x][0]);
-      //ans[x][1].createLegend("leg"+ans[x][0]);
-      //if (x==1  ) break;
-        
-    }
-
-    
-   
-         
-       }
-         
-        else {
-         console.log("Eror in request to server for querries in live status");
-       }
-      }
-     xmlhttp.open("GET", "./queries/live_status.php", true);
-     xmlhttp.send();
 
 
 </script>
