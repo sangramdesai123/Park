@@ -1,0 +1,39 @@
+   <script>
+     
+
+      var xmlhttp = new XMLHttpRequest();
+
+
+      xmlhttp.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("reached");
+
+          var user_count_by_time = JSON.parse(this.responseText);
+          console.log(user_count_by_time);
+
+
+
+          
+          //generation of time labels
+          var timelabel = [];
+          var counts = [];
+          for (var x = 0; x < user_count_by_time.length; ++x) {
+            var entry = user_count_by_time[x];
+            timelabel.push(entry['hh']);
+            counts.push(entry['cnt']);
+          }
+         
+
+
+        } else {
+          console.log("Eror in request to server for querries");
+        }
+      }
+      xmlhttp.open("GET", "./queries/user_count_by_time.php", true);
+      xmlhttp.send();
+
+
+<script>
+
+      
