@@ -1,0 +1,10 @@
+SELECT username,booking_id,FIRST_NAME ,LAST_NAME,level_number,slot_number FROM normal_user NATURAL JOIN (SELECT booking_id,username,level_number,slot_number from booking NATURAL join slot_status) AS a
+
+SELECT count(*) as customer_count from slot_status;
+
+SELECT AVG(hour(timediff(exit_time,entry_time))*60+MINUTE(timediff(exit_time,entry_time))) as avg_park_time from booking
+
+select sum(total_fare) as revenue from booking where exit_time <= CURRENT_TIMESTAMP and date(exit_time) = date(CURRENT_TIMESTAMP);
+
+select count(DISTINCT username) as unique_cust from booking 
+

@@ -1,0 +1,9 @@
+issues:
+
+vehicle enters at last day of month and leaves next month
+row * column calculations remaining in seatchart diabled seats for remainder of perfect quotient 
+adding  current year in all quries
+legend remaining for some charts
+
+
+

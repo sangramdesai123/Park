@@ -1,5 +1,6 @@
 <?php 
-session_start(); 
+session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); } 
+
 ?>
 
 <!DOCTYPE html>
@@ -7,7 +8,7 @@ session_start();
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>AdminLTE 2 | Dashboard</title>
+    <title>Cidco Parking  | Dashboard</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -23,6 +24,9 @@ session_start();
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="./dist/css/seatchart.css">
+    <link rel="shortcut icon" href="#" />
+    <script type="text/javascript" src="./dist/js/seatchart.js"></script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -134,16 +138,6 @@ session_start();
                 <li><a href="booking.php"><i class="fa fa-circle-o"></i> Booking Status</a></li>
               </ul>
             </li>
-            <li class="treeview">
-              <a href="#">
-                <i class="fa fa-files-o"></i>
-                <span>Parking</span><i class="fa fa-angle-left pull-right"></i>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="slotstaus.php"><i class="fa fa-circle-o"></i> Parking Status</a></li>
-                <li><a href="booking.php"><i class="fa fa-circle-o"></i> Live Status</a></li>
-              </ul>
-            </li>
             <li>
             <li class="treeview">
               <a href="#">
@@ -168,17 +162,17 @@ session_start();
               </ul>
             </li>
 
-            <li class="treeview">
+           <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
                 <span>Analysis</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="Analysis.php"><i class="fa fa-circle-o"></i>Graphical Data </a></li>
+               
+               
+               
               </ul>
             </li>
       
@@ -222,19 +216,19 @@ session_start();
           <div class="row">
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
+                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Total Traffic</span>
-                  <span class="info-box-number">90<small>%</small></span>
+                  <span class="info-box-text"><strong>Live Customer <br> count<strong></span>
+                  <span class="info-box-number" id='cust_cnt'><small>%</small></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-red"><i class="fa fa-google-plus"></i></span>
+                <span class="info-box-icon bg-red"><i class="fa fa-clock-o"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Likes</span>
-                  <span class="info-box-number">41,410</span>
+                  <span class="info-box-text" >Avgerage Parking<br> Time</span>
+                  <span class="info-box-number" id="avg_park" ></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -244,10 +238,10 @@ session_start();
 
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="info-box">
-                <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                <span class="info-box-icon bg-green"><i class="fa fa-inr" aria-hidden="true"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">Revenue</span>
-                  <span class="info-box-number">760 rs</span>
+                  <span class="info-box-text" >Revenue</span>
+                  <span class="info-box-number"id='revenue'></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
@@ -255,116 +249,53 @@ session_start();
               <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="ion ion-ios-people-outline"></i></span>
                 <div class="info-box-content">
-                  <span class="info-box-text">New Members</span>
-                  <span class="info-box-number">2,000</span>
+                  <span class="info-box-text" >Unique<br>customers</span>
+                  <span class="info-box-number"id="unique_cust"></span>
                 </div><!-- /.info-box-content -->
               </div><!-- /.info-box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
 
-          <div class="row">
+
+
+            <div class="row">
             <div class="col-md-12">
               <div class="box">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Monthly Recap Report</h3>
-                  <div class="box-tools pull-right">
-                    <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
-                    <div class="btn-group">
-                      <button class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown"><i class="fa fa-wrench"></i></button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                      </ul>
+                  <h3 class="box-title"><strong>Live Status of slots</strong></h3>
+                  
+                    <div id="seatmaps">
                     </div>
-                    <button class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                    
+                     
+                      
+                 
+                       
+                      
+                    </div>
+                   
+                     
+
+
+
                   </div>
                 </div><!-- /.box-header -->
-                <div class="box-body">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <p class="text-center">
-                        <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                      </p>
-                      <div class="chart">
-                        <!-- Sales Chart Canvas -->
-                        <canvas id="salesChart" style="height: 180px;"></canvas>
-                      </div><!-- /.chart-responsive -->
-                    </div><!-- /.col -->
-                    <div class="col-md-4">
-                      <p class="text-center">
-                        <strong>Goal Completion</strong>
-                      </p>
-                      <div class="progress-group">
-                        <span class="progress-text">Add Products to Cart</span>
-                        <span class="progress-number"><b>160</b>/200</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-aqua" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Complete Purchase</span>
-                        <span class="progress-number"><b>310</b>/400</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-red" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Visit Premium Page</span>
-                        <span class="progress-number"><b>480</b>/800</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-green" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                      <div class="progress-group">
-                        <span class="progress-text">Send Inquiries</span>
-                        <span class="progress-number"><b>250</b>/500</span>
-                        <div class="progress sm">
-                          <div class="progress-bar progress-bar-yellow" style="width: 80%"></div>
-                        </div>
-                      </div><!-- /.progress-group -->
-                    </div><!-- /.col -->
-                  </div><!-- /.row -->
                 </div><!-- ./box-body -->
-                <div class="box-footer">
-                  <div class="row">
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 17%</span>
-                        <h5 class="description-header">$35,210.43</h5>
-                        <span class="description-text">TOTAL REVENUE</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-yellow"><i class="fa fa-caret-left"></i> 0%</span>
-                        <h5 class="description-header">$10,390.90</h5>
-                        <span class="description-text">TOTAL COST</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block border-right">
-                        <span class="description-percentage text-green"><i class="fa fa-caret-up"></i> 20%</span>
-                        <h5 class="description-header">$24,813.53</h5>
-                        <span class="description-text">TOTAL PROFIT</span>
-                      </div><!-- /.description-block -->
-                    </div><!-- /.col -->
-                    <div class="col-sm-3 col-xs-6">
-                      <div class="description-block">
-                        <span class="description-percentage text-red"><i class="fa fa-caret-down"></i> 18%</span>
-                        <h5 class="description-header">1200</h5>
-                        <span class="description-text">GOAL COMPLETIONS</span>
-                      </div><!-- /.description-block -->
-                    </div>
-                  </div><!-- /.row -->
-                </div><!-- /.box-footer -->
+                 </div><!-- /.box-footer -->
               </div><!-- /.box -->
             </div><!-- /.col -->
           </div><!-- /.row -->
 
-        </section><!-- /.content -->
+
+
+          
+          
+   
+
+
+
+
+        </section><!-- /.content -->    
       </div><!-- /.content-wrapper -->
 
       <footer class="main-footer">
@@ -378,6 +309,205 @@ session_start();
 
     </div><!-- ./wrapper -->
 
+      <!-- Dashboad Anayltics -->
+     <script>
+             var xmlhttp = new XMLHttpRequest();
+
+
+             xmlhttp.onreadystatechange = function () {
+
+               if (this.readyState == 4 && this.status == 200) {
+                 console.log("reached");
+
+                 var analytics = JSON.parse(this.responseText);
+                 console.log("analytics");
+                 console.log(analytics);
+                
+                 
+                if(analytics[0]["customer_count"]!=null)  
+                document.getElementById("cust_cnt").textContent=analytics[0]["customer_count"];
+                else{
+                  document.getElementById("cust_cnt").textContent="0";
+                }
+
+                if(analytics[1]["avg_park_time"]!=null)
+                document.getElementById("avg_park").textContent=analytics[1]["avg_park_time"]+" mins";
+                else{
+                  document.getElementById("avg_park").textContent="0";
+                }
+
+                
+                if(analytics[2]["revenue"]!=null)                
+                document.getElementById("revenue").textContent="Rs "+analytics[2]["revenue"];
+                else{
+                document.getElementById("revenue").textContent="Rs 0";
+                }
+
+                if(analytics[3]["unique_cust"]!=null)
+                document.getElementById("unique_cust").textContent=analytics[3]["unique_cust"];
+                else{
+                  document.getElementById("unique_cust").textContent="0";
+                }
+
+
+
+                
+
+
+
+               } else {
+                 console.log("Eror in request to server for querries");
+               }
+             }
+             xmlhttp.open("GET", "./queries/dashboard_querry.php", true);
+             xmlhttp.send();
+
+
+
+      </script>
+     
+
+
+    <script >
+
+      
+      var xmlhttp2 = new XMLHttpRequest();
+      var parking_info = [];
+
+      xmlhttp2.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+          console.log("reached inside for getting parking infor");
+
+          parking_info = JSON.parse(this.responseText);
+          console.log(parking_info);
+          var baksa=document.getElementById('seatmaps');
+          for(var x=0;x<parking_info.length;++x){
+           var map_el= document.createElement("div");
+           var leg_el= document.createElement("div");
+           map_el.setAttribute("id","map"+(x+1));
+           leg_el.setAttribute("id","leg"+(x+1));
+           baksa.appendChild(map_el);
+           baksa.appendChild(leg_el);
+          }
+
+
+
+          // get request for live_status of slots inside parking_info get status becoz this should happen
+          //after parking_info get request
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.onreadystatechange = function () {
+
+            if (this.readyState == 4 && this.status == 200) {
+              console.log("reached inside for getting live status");
+              var live_status;
+              try {
+                live_status = JSON.parse(this.responseText);
+                console.log(live_status);
+              } catch (e) {
+                live_status = null;
+              }
+
+
+              // Reserved and disabled seats are indexed
+              // from left to right by starting from 0.
+              // Given the seatmap as a 2D array and an index [R, C]
+              // the following values can obtained as follow:
+              // I = cols * R + C
+              var sel = {};
+              for (var x = 1; x <= parking_info.length; ++x) sel[x] = new Array();
+              console.log("sdfsdfdsfs");
+              if (live_status != null) {
+
+                for (var x = 0; x < live_status.length; x++) {
+                  // var entry=live_status[x];
+                  //0 indexed slots 
+                  sel[live_status[x]["level_number"]].push(live_status[x]['slot_number'] - 1);
+
+                }
+              }
+              console.log("sel");
+              console.log(sel);
+
+              var ans = [];
+
+              for (var x = 0; x < parking_info.length; ++x) {
+
+                // var entry=parking_info[x];
+
+                //console.log("giw "+sel[entry["level_number"]]);
+                var rr = parking_info[x]["number_of_slots"];
+
+
+                var map = {
+                  rows: parseInt(rr) / 20,
+                  cols: 20,
+                  // e.g. Reserved Seat { Row: 1 (starts from 0), Col: 2 } = 9 * 1 + 2 = 11
+                  //reserved: [1, 2, 3, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 20, 21],
+                  //disabled: [4, 8],
+                  // disabledRows: [1],
+                  //disabledCols: [4]
+                };
+
+                var types = new Array();
+                types = [{
+                  type: "booked",
+                  color: "green",
+                  price: 0,
+                  selected: sel[parking_info[x]["level_number"]]
+                }, ];
+
+
+                //console.log("types");
+                //console.log(types);
+                // var sc = new Seatchart(map, types,entry["level_number"]);
+                //sc.setAssetsSrc("/path/to/assets");
+                console.log("live status");
+                console.log(live_status);
+
+                ans.push([parking_info[x]["level_number"], new Seatchart(map, types, parking_info[x]["level_number"], live_status)]);
+
+
+              }
+
+
+              //console.log(ans);
+              for (var x = 0; x < ans.length; ++x) {
+                //var p = ans[x];
+                ans[x][1].createMap("map" + ans[x][0]);
+                //ans[x][1].createLegend("leg"+ans[x][0]);
+                //if (x==1  ) break;
+
+              }
+
+
+
+
+            } else {
+              console.log("Eror in request to server for querries in live status");
+            }
+          }
+          xmlhttp.open("GET", "./queries/live_status.php", true);
+          xmlhttp.send();
+
+
+
+
+        } else {
+          console.log("Eror in request to server for querries in parking");
+        }
+
+      }
+  xmlhttp2.open("GET", "./queries/parking_info.php", true);
+  xmlhttp2.send();
+
+     
+
+
+
+</script>
+
+    
     <!-- jQuery 2.1.4 -->
     <script src="plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <!-- Bootstrap 3.3.5 -->
@@ -396,7 +526,7 @@ session_start();
     <!-- ChartJS 1.0.1 -->
     <script src="plugins/chartjs/Chart.min.js"></script>
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard2.js"></script>
+    
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
   </body>

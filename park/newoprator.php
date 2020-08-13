@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    session_start();if(!isset($_SESSION['username'])){   header("Location: ../login.php");   exit(); }
     include_once("../config/config.php");
     if(isset($_GET['username'])){
       $username=$_GET['username'];
@@ -186,20 +186,19 @@
               </ul>
             </li>
 
-            <li class="treeview">
+              <li class="treeview">
               <a href="#">
                 <i class="fa fa-pie-chart"></i>
                 <span>Analysis</span>
                 <i class="fa fa-angle-left pull-right"></i>
               </a>
               <ul class="treeview-menu">
-                <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-                <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-                <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-                <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
+                <li><a href="Analysis.php"><i class="fa fa-circle-o"></i>Graphical Data </a></li>
+               
+               
+               
               </ul>
             </li>
-      
             <li class="active treeview">
               <a href="#">
                 <i class="fa fa-edit"></i> <span>Forms</span>

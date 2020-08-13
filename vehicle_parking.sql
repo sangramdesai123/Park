@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.3
+-- version 4.6.6deb5
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 05, 2019 at 08:50 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.2.12
+-- Host: localhost:3306
+-- Generation Time: Jul 02, 2019 at 10:16 AM
+-- Server version: 5.7.26-0ubuntu0.18.04.1
+-- PHP Version: 7.3.6-1+ubuntu18.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -50,48 +48,75 @@ INSERT INTO `admin` (`username`, `first_name`, `last_name`, `contact`, `address`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Base_Fare`
+-- Table structure for table `base_fare`
 --
 
-CREATE TABLE `Base_Fare` (
+CREATE TABLE `base_fare` (
   `vehicle_category` varchar(20) NOT NULL,
   `fare` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Base_Fare`
+-- Dumping data for table `base_fare`
 --
 
-INSERT INTO `Base_Fare` (`vehicle_category`, `fare`) VALUES
-('Four wheeler', 30),
-('Two wheeler', 20);
+INSERT INTO `base_fare` (`vehicle_category`, `fare`) VALUES
+('Four wheeler', 3),
+('Two wheeler', 2);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Booking`
+-- Table structure for table `booking`
 --
 
-CREATE TABLE `Booking` (
+CREATE TABLE `booking` (
   `username` varchar(15) NOT NULL,
   `booking_id` int(10) NOT NULL,
   `vehicle_category` varchar(20) NOT NULL,
-  `entry_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `entry_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `parking_time` int(5) NOT NULL,
-  `exit_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `exit_time` timestamp NULL DEFAULT NULL,
   `date` date NOT NULL,
-  `total_fare` int(10) NOT NULL,
+  `total_fare` int(10) NOT NULL DEFAULT '0',
   `level_number` int(5) NOT NULL,
   `slot_number` int(5) NOT NULL,
   `OTP` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Booking`
+-- Dumping data for table `booking`
 --
 
-INSERT INTO `Booking` (`username`, `booking_id`, `vehicle_category`, `entry_time`, `parking_time`, `exit_time`, `date`, `total_fare`, `level_number`, `slot_number`, `OTP`) VALUES
+INSERT INTO `booking` (`username`, `booking_id`, `vehicle_category`, `entry_time`, `parking_time`, `exit_time`, `date`, `total_fare`, `level_number`, `slot_number`, `OTP`) VALUES
 ('Aaron', 913690, 'Two wheeler', '2019-04-02 14:28:16', 60, '2019-04-02 15:16:49', '2019-04-02', 30, 1, 5, 613),
+('Aaron', 2443546, 'Two wheeler', '2019-06-27 10:59:00', 176, '2019-06-27 13:55:00', '2019-06-27', 352, 1, 39, 55823),
+('Aaron', 2443547, 'Two wheeler', '2019-06-27 13:55:00', 2, '2019-06-27 13:57:00', '2019-06-27', 4, 1, 3, 93776),
+('Aaron', 2443548, 'Two wheeler', '2019-06-27 13:57:00', 0, '2019-06-27 13:57:00', '2019-06-27', 0, 1, 3, 22731),
+('Aaron', 2443549, 'Two wheeler', '2019-06-27 13:58:00', 1, '2019-06-27 13:59:00', '2019-06-27', 2, 1, 5, 55717),
+('Aaron', 2443550, 'Two wheeler', '2019-06-27 14:16:00', 0, '2019-06-27 14:16:00', '2019-06-27', 0, 1, 14, 72312),
+('Aaron', 2443551, 'Two wheeler', '2019-06-27 16:12:00', 1, '2019-06-27 16:13:00', '2019-06-27', 2, 1, 2, 35002),
+('Aaron', 2443552, 'Two wheeler', '2019-06-28 10:33:00', 94, '2019-06-28 12:07:00', '2019-06-28', 188, 1, 9, 96175),
+('Aaron', 2443553, 'Two wheeler', '2019-06-28 15:45:00', 15, '2019-06-28 16:00:00', '2019-06-28', 30, 1, 11, 69752),
+('Aaron', 2443554, 'Two wheeler', '2019-06-28 15:49:00', 2, '2019-06-28 15:51:00', '2019-06-28', 4, 1, 15, 85198),
+('Aaron', 2443555, 'Two wheeler', '2019-06-29 07:01:00', 1, '2019-06-29 07:02:00', '2019-06-29', 2, 1, 1, 36311),
+('Aaron', 2443556, 'Two wheeler', '2019-06-29 07:37:00', 1, '2019-06-29 07:38:00', '2019-06-29', 2, 1, 16, 50381),
+('Aaron', 2443557, 'Two wheeler', '2019-06-29 07:40:00', 1, '2019-06-29 07:41:00', '2019-06-29', 2, 1, 28, 82350),
+('Aaron', 2443558, 'Two wheeler', '2019-06-29 07:44:00', 1, '2019-06-29 07:45:00', '2019-06-29', 2, 1, 15, 21588),
+('Aaron', 2443559, 'Two wheeler', '2019-06-29 07:56:00', 1, '2019-06-29 07:57:00', '2019-06-29', 2, 1, 21, 45951),
+('Aaron', 2443560, 'Two wheeler', '2019-06-29 07:57:00', 1, '2019-06-29 07:58:00', '2019-06-29', 2, 1, 14, 52173),
+('Aaron', 2443561, 'Two wheeler', '2019-06-29 08:03:00', 0, '2019-06-29 08:03:00', '2019-06-29', 0, 1, 11, 94450),
+('Aaron', 2443562, 'Two wheeler', '2019-06-29 08:05:00', 0, '2019-06-29 08:05:00', '2019-06-29', 0, 1, 26, 17935),
+('Aaron', 2443563, 'Two wheeler', '2019-06-29 08:07:00', 1, '2019-06-29 08:08:00', '2019-06-29', 2, 1, 25, 72028),
+('Aaron', 2443564, 'Two wheeler', '2019-06-29 08:12:00', 0, '2019-06-29 08:12:00', '2019-06-29', 0, 1, 6, 51278),
+('Aaron', 2443565, 'Two wheeler', '2019-06-29 08:14:00', 0, '2019-06-29 08:14:00', '2019-06-29', 0, 1, 8, 24746),
+('Aaron', 2443566, 'Two wheeler', '2019-06-29 08:17:00', 0, '2019-06-29 08:17:00', '2019-06-29', 0, 1, 4, 49139),
+('Aaron', 2443567, 'Two wheeler', '2019-06-29 08:18:00', 0, '2019-06-29 08:18:00', '2019-06-29', 0, 1, 20, 95905),
+('Aaron', 2443568, 'Two wheeler', '2019-06-29 14:35:00', 1, '2019-06-29 14:36:00', '2019-06-29', 2, 1, 9, 48830),
+('Aaron', 2443569, 'Two wheeler', '2019-07-01 09:24:00', 7, '2019-07-01 09:31:00', '2019-07-01', 14, 1, 2, 65703),
+('Aaron', 2443570, 'Two wheeler', '2019-07-01 09:27:00', 12, '2019-07-01 09:39:00', '2019-07-01', 24, 2, 7, 44597),
+('Aaron', 2443573, 'Two wheeler', '2019-07-02 04:38:00', 2, '2019-07-02 04:40:00', '2019-07-02', 4, 1, 10, 13615),
+('Aaron', 2443574, 'Two wheeler', '2019-07-02 04:39:00', 2, '2019-07-02 04:41:00', '2019-07-02', 4, 1, 30, 17644),
 ('Agustin', 285512, 'Two wheeler', '2019-04-04 14:51:09', 60, '2019-04-04 16:22:05', '2019-04-04', 30, 3, 24, 481),
 ('Aline', 636735, 'Four wheeler', '2019-04-15 14:47:47', 60, '2019-04-15 15:42:00', '2019-04-15', 30, 3, 14, 730),
 ('Anna', 390874, 'Four wheeler', '2019-04-25 14:19:06', 60, '2019-04-25 15:21:10', '2019-04-25', 30, 2, 47, 871),
@@ -122,6 +147,7 @@ INSERT INTO `Booking` (`username`, `booking_id`, `vehicle_category`, `entry_time
 ('Heriberto', 283044, 'Two wheeler', '2019-04-12 14:35:24', 60, '2019-04-12 16:03:51', '2019-04-12', 30, 1, 22, 220),
 ('Holly', 992287, 'Four wheeler', '2019-09-02 06:14:14', 60, '2019-09-02 06:35:02', '2019-09-02', 30, 2, 30, 284),
 ('Hugh', 468579, 'Four wheeler', '2019-06-22 09:53:00', 60, '2019-06-22 10:33:00', '2019-06-22', 30, 1, 9, 563),
+('Hugh', 2443572, 'Four wheeler', '2019-07-01 15:19:00', 15, '2019-07-01 15:34:00', '2019-07-01', 45, 1, 2, 55322),
 ('Jacqueline', 635872, 'Four wheeler', '2019-04-08 14:27:59', 60, '2019-04-08 15:23:58', '2019-04-08', 30, 2, 6, 166),
 ('James', 901785, 'Four wheeler', '2019-11-19 10:13:17', 60, '2019-11-19 10:47:26', '2019-11-19', 30, 1, 29, 275),
 ('Jane', 339759, 'Four wheeler', '2019-09-27 06:00:28', 60, '2019-09-27 07:22:36', '2019-09-27', 30, 3, 27, 786),
@@ -129,6 +155,7 @@ INSERT INTO `Booking` (`username`, `booking_id`, `vehicle_category`, `entry_time
 ('Jeffrey', 693556, 'Four wheeler', '2019-07-22 14:54:24', 60, '2019-07-22 16:12:53', '2019-07-22', 30, 3, 5, 581),
 ('Jesse', 235154, 'Four wheeler', '2019-10-04 07:30:48', 60, '2019-10-04 09:29:38', '2019-10-04', 30, 1, 12, 301),
 ('John', 417825, 'Four wheeler', '2019-12-24 10:56:26', 60, '2019-12-24 12:12:22', '2019-12-24', 30, 1, 27, 977),
+('John', 2443571, 'Four wheeler', '2019-07-01 15:14:00', 8, '2019-07-01 15:22:00', '2019-07-01', 24, 1, 1, 95818),
 ('Jose', 847073, 'Four wheeler', '2019-01-10 06:41:45', 60, '2019-01-10 07:49:55', '2019-01-10', 30, 2, 14, 196),
 ('Joseph', 985457, 'Two wheeler', '2019-10-22 12:32:22', 60, '2019-10-22 14:04:37', '2019-10-22', 30, 3, 6, 910),
 ('Joshua', 734312, 'Four wheeler', '2019-03-20 06:59:02', 60, '2019-03-20 08:21:59', '2019-03-20', 30, 1, 2, 966),
@@ -179,6 +206,47 @@ INSERT INTO `Booking` (`username`, `booking_id`, `vehicle_category`, `entry_time
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `daytime`
+--
+
+CREATE TABLE `daytime` (
+  `hh` int(11) DEFAULT NULL,
+  `cnt` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `daytime`
+--
+
+INSERT INTO `daytime` (`hh`, `cnt`) VALUES
+(0, 0),
+(1, 0),
+(2, 0),
+(3, 0),
+(4, 0),
+(5, 0),
+(6, 0),
+(7, 0),
+(8, 0),
+(9, 0),
+(10, 0),
+(11, 0),
+(12, 0),
+(13, 0),
+(14, 0),
+(15, 0),
+(16, 0),
+(17, 0),
+(18, 0),
+(19, 0),
+(20, 0),
+(21, 0),
+(22, 0),
+(23, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `login_info`
 --
 
@@ -193,6 +261,7 @@ CREATE TABLE `login_info` (
 --
 
 INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
+('', '', 'Normal'),
 ('Aaron', 'Aaron', 'Normal'),
 ('Agustin', 'Agustin', 'Normal'),
 ('Aline', 'Aline', 'Normal'),
@@ -223,7 +292,9 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 ('Elwood', 'Elwood', 'Normal'),
 ('Evelyn', 'Evelyn', 'Normal'),
 ('Glenda', 'Glenda', 'Normal'),
+('h', '123456', 'Normal'),
 ('harsh', 'harsh', 'Normal'),
+('harsh123', 'harsh', 'Operator'),
 ('Harvey', 'Harvey', 'Normal'),
 ('Helen', 'Helen', 'Normal'),
 ('Heriberto', 'Heriberto', 'Normal'),
@@ -245,6 +316,7 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 ('Kathleen', 'Kathleen', 'Normal'),
 ('Kenneth', 'Kenneth', 'Normal'),
 ('Kim', 'Kim', 'Normal'),
+('kjsce', 'kjsce123', 'Normal'),
 ('Kristin', 'Kristin', 'Normal'),
 ('Laura', 'Laura', 'Normal'),
 ('Lela', 'Lela', 'Normal'),
@@ -258,6 +330,7 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 ('Megan', 'Megan', 'Normal'),
 ('Michael', 'Michael', 'Normal'),
 ('Mildred', 'Mildred', 'Normal'),
+('newop', 'tush123', 'Operator'),
 ('Nichelle', 'Nichelle', 'Normal'),
 ('Nichole', 'Nichole', 'Normal'),
 ('Patricia', 'Patricia', 'Normal'),
@@ -277,6 +350,7 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 ('Tamra', 'Tamra', 'Normal'),
 ('Therese', 'Therese', 'Normal'),
 ('Timothy', 'Timothy', 'Normal'),
+('tush', 'tush123', 'Operator'),
 ('Victor', 'Victor', 'Normal'),
 ('Victoria', 'Victoria', 'Normal'),
 ('Vincent', 'Vincent', 'Normal'),
@@ -287,10 +361,10 @@ INSERT INTO `login_info` (`username`, `password`, `user_type`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Normal_User`
+-- Table structure for table `normal_user`
 --
 
-CREATE TABLE `Normal_User` (
+CREATE TABLE `normal_user` (
   `username` varchar(15) NOT NULL,
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
@@ -301,11 +375,11 @@ CREATE TABLE `Normal_User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Normal_User`
+-- Dumping data for table `normal_user`
 --
 
-INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
-('Aaron', 'Aaron', 'Glenn', 2147483647, '42734', 'Vidyavihar', 9622),
+INSERT INTO `normal_user` (`username`, `first_name`, `last_name`, `contact`, `licence_number`, `address`, `OTP`) VALUES
+('Aaron', 'Aaron', 'Glenna', 2147483647, '4271231231231234', 'Vidyavihar', 9622),
 ('Agustin', 'Agustin', 'Jones', 2147483647, '42930', 'Airoli', 8384),
 ('Aline', 'Aline', 'Salmons', 2147483647, '36710', 'Mumbai', 600),
 ('Anna', 'Anna', 'Larson', 2147483647, '37348', 'Airoli', 6952),
@@ -333,6 +407,7 @@ INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `li
 ('Elwood', 'Elwood', 'Namm', 2147483647, '36922', 'Airoli', 905),
 ('Evelyn', 'Evelyn', 'Swank', 2147483647, '38476', 'Pune', 1682),
 ('Glenda', 'Glenda', 'Miller', 2147483647, '40920', 'Vidyavihar', 9844),
+('h', 'g', 'h', 1111111111, 'deereeereere', 'b', 47925),
 ('Harvey', 'Harvey', 'Selby', 2147483647, '37955', 'Mumbai', 3257),
 ('Helen', 'Helen', 'Pomroy', 2147483647, '39490', 'Mumbai', 3340),
 ('Heriberto', 'Heriberto', 'Kelly', 2147483647, '37979', 'Mumbai', 5139),
@@ -344,7 +419,7 @@ INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `li
 ('Janet', 'Janet', 'Manuel', 2147483647, '38728', 'Pune', 5664),
 ('Jeffrey', 'Jeffrey', 'Borelli', 2147483647, '35788', 'Pune', 2564),
 ('Jesse', 'Jesse', 'Moore', 2147483647, '33989', 'Pune', 9820),
-('John', 'John', 'Fernandez', 2147483647, '37852', 'Mumbai', 433),
+('John', 'John', 'Fer', 2147483647, '123456788901', 'Mumbai', 433),
 ('Jose', 'Jose', 'Sandoval', 2147483647, '37177', 'Pune', 5444),
 ('Joseph', 'Joseph', 'Fuller', 2147483647, '40780', 'Airoli', 1200),
 ('Joshua', 'Joshua', 'Solis', 2147483647, '38491', 'Pune', 5813),
@@ -396,10 +471,10 @@ INSERT INTO `Normal_User` (`username`, `first_name`, `last_name`, `contact`, `li
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Operator_User`
+-- Table structure for table `operator_user`
 --
 
-CREATE TABLE `Operator_User` (
+CREATE TABLE `operator_user` (
   `username` varchar(15) NOT NULL,
   `first_name` varchar(15) NOT NULL,
   `last_name` varchar(15) NOT NULL,
@@ -410,53 +485,89 @@ CREATE TABLE `Operator_User` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Operator_User`
+-- Dumping data for table `operator_user`
 --
 
-INSERT INTO `Operator_User` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `photo`) VALUES
+INSERT INTO `operator_user` (`username`, `first_name`, `last_name`, `contact`, `address`, `adhaar_number`, `photo`) VALUES
 ('cis_pie', 'Tushar', 'Kadam', 86555, 'Airoli', 35563, '/opt/lampp/htdocs/Park/park/operator_pics/tushar.jpeg'),
-('desai_sangram', 'sangram', 'desai', 34534, 'Mumbai', 678564, '/opt/lampp/htdocs/Park/park/operator_pics/sangram.jpeg');
+('desai_sangram', 'sangram', 'desai', 34534, 'Mumbai', 678564, '/opt/lampp/htdocs/Park/park/operator_pics/sangram.jpeg'),
+('harsh123', 'h', 'g', 1234567890, 'fsd', 234567892, '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Parking_info`
+-- Table structure for table `parking_info`
 --
 
-CREATE TABLE `Parking_info` (
+CREATE TABLE `parking_info` (
   `level_number` int(5) NOT NULL,
   `number_of_slots` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Parking_info`
+-- Dumping data for table `parking_info`
 --
 
-INSERT INTO `Parking_info` (`level_number`, `number_of_slots`) VALUES
-(1, 50),
+INSERT INTO `parking_info` (`level_number`, `number_of_slots`) VALUES
+(1, 40),
 (2, 50),
 (3, 50);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Slot_Status`
+-- Table structure for table `payment_info`
 --
 
-CREATE TABLE `Slot_Status` (
+CREATE TABLE `payment_info` (
+  `booking_id` int(10) NOT NULL,
+  `transaction_id` int(10) NOT NULL,
+  `total_fare` int(10) NOT NULL,
+  `payment_mode` varchar(10) NOT NULL,
+  `payment_status` varchar(10) NOT NULL DEFAULT 'pending',
+  `verification` varchar(10) NOT NULL DEFAULT 'pending',
+  `OTP` int(6) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment_info`
+--
+
+INSERT INTO `payment_info` (`booking_id`, `transaction_id`, `total_fare`, `payment_mode`, `payment_status`, `verification`, `OTP`) VALUES
+(2443553, 123123, 30, 'Offline', 'Done', 'Done', 93776),
+(2443554, 123456, 30, 'Offline', 'Done', 'Done', 96175),
+(2443563, 132456, 2, 'Offline', 'Done', 'Done', 72028),
+(2443565, 759615, 0, 'Offline', 'Done', 'Done', 24746),
+(2443566, 964488, 0, 'Offline', 'Done', 'Done', 49139),
+(2443567, 913652, 0, 'Offline', 'Done', 'Done', 95905),
+(2443568, 166797, 2, 'Offline', 'Done', 'Done', 48830),
+(2443569, 164278, 14, 'Offline', 'Done', 'Done', 65703),
+(2443570, 315162, 8, 'Offline', 'Done', 'Done', 44597),
+(2443571, 371277, 24, 'Offline', 'Done', 'Done', 95818),
+(2443572, 365452, 3, 'Offline', 'Done', 'Done', 55322),
+(2443573, 916242, 4, 'Offline', 'Done', 'Done', 13615),
+(2443574, 91256, 4, 'Offline', 'Done', 'Done', 17644);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `slot_status`
+--
+
+CREATE TABLE `slot_status` (
   `level_number` int(5) NOT NULL,
   `slot_number` int(5) NOT NULL,
   `booking_id` int(10) NOT NULL,
-  `status` varchar(10) NOT NULL
+  `status` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `Vehicle_info`
+-- Table structure for table `vehicle_info`
 --
 
-CREATE TABLE `Vehicle_info` (
+CREATE TABLE `vehicle_info` (
   `username` varchar(15) NOT NULL,
   `plate_number` varchar(15) NOT NULL,
   `vehicle_category` varchar(20) NOT NULL,
@@ -465,10 +576,10 @@ CREATE TABLE `Vehicle_info` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `Vehicle_info`
+-- Dumping data for table `vehicle_info`
 --
 
-INSERT INTO `Vehicle_info` (`username`, `plate_number`, `vehicle_category`, `vehicle_company`, `vehicle_model`) VALUES
+INSERT INTO `vehicle_info` (`username`, `plate_number`, `vehicle_category`, `vehicle_company`, `vehicle_model`) VALUES
 ('harsh', 'MH-0548', 'Four wheeler', 'Maruti Suzuki', 'Swift'),
 ('Armando', 'MH-107392', 'Four wheeler', 'Ford', 'figo'),
 ('Bobbye', 'MH-111091', 'Four wheeler', 'Ford', 'figo'),
@@ -570,15 +681,15 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Base_Fare`
+-- Indexes for table `base_fare`
 --
-ALTER TABLE `Base_Fare`
+ALTER TABLE `base_fare`
   ADD PRIMARY KEY (`vehicle_category`);
 
 --
--- Indexes for table `Booking`
+-- Indexes for table `booking`
 --
-ALTER TABLE `Booking`
+ALTER TABLE `booking`
   ADD PRIMARY KEY (`username`,`booking_id`),
   ADD UNIQUE KEY `OTP` (`OTP`),
   ADD UNIQUE KEY `booking_id` (`booking_id`),
@@ -592,70 +703,99 @@ ALTER TABLE `login_info`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Normal_User`
+-- Indexes for table `normal_user`
 --
-ALTER TABLE `Normal_User`
+ALTER TABLE `normal_user`
   ADD PRIMARY KEY (`username`),
   ADD UNIQUE KEY `OTP` (`OTP`);
 
 --
--- Indexes for table `Operator_User`
+-- Indexes for table `operator_user`
 --
-ALTER TABLE `Operator_User`
+ALTER TABLE `operator_user`
   ADD PRIMARY KEY (`username`);
 
 --
--- Indexes for table `Parking_info`
+-- Indexes for table `parking_info`
 --
-ALTER TABLE `Parking_info`
+ALTER TABLE `parking_info`
   ADD PRIMARY KEY (`level_number`);
 
 --
--- Indexes for table `Slot_Status`
+-- Indexes for table `payment_info`
 --
-ALTER TABLE `Slot_Status`
+ALTER TABLE `payment_info`
+  ADD PRIMARY KEY (`booking_id`),
+  ADD UNIQUE KEY `transaction_id` (`transaction_id`),
+  ADD UNIQUE KEY `OTP` (`OTP`);
+
+--
+-- Indexes for table `slot_status`
+--
+ALTER TABLE `slot_status`
   ADD PRIMARY KEY (`level_number`,`slot_number`),
   ADD KEY `booking_id_fk` (`booking_id`);
 
 --
--- Indexes for table `Vehicle_info`
+-- Indexes for table `vehicle_info`
 --
-ALTER TABLE `Vehicle_info`
+ALTER TABLE `vehicle_info`
   ADD PRIMARY KEY (`plate_number`),
   ADD KEY `username_fk_v` (`username`),
   ADD KEY `category_fk` (`vehicle_category`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `booking`
+--
+ALTER TABLE `booking`
+  MODIFY `booking_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2443575;
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `Booking`
+-- Constraints for table `booking`
 --
-ALTER TABLE `Booking`
-  ADD CONSTRAINT `category_fk_b` FOREIGN KEY (`vehicle_category`) REFERENCES `Base_Fare` (`vehicle_category`),
-  ADD CONSTRAINT `level_fk` FOREIGN KEY (`level_number`) REFERENCES `Parking_info` (`level_number`),
+ALTER TABLE `booking`
+  ADD CONSTRAINT `category_fk_b` FOREIGN KEY (`vehicle_category`) REFERENCES `base_fare` (`vehicle_category`),
+  ADD CONSTRAINT `level_fk` FOREIGN KEY (`level_number`) REFERENCES `parking_info` (`level_number`),
   ADD CONSTRAINT `username_fk_b` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 
 --
--- Constraints for table `Normal_User`
+-- Constraints for table `normal_user`
 --
-ALTER TABLE `Normal_User`
+ALTER TABLE `normal_user`
   ADD CONSTRAINT `username_fk` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 
 --
--- Constraints for table `Slot_Status`
+-- Constraints for table `operator_user`
 --
-ALTER TABLE `Slot_Status`
-  ADD CONSTRAINT `booking_id_fk` FOREIGN KEY (`booking_id`) REFERENCES `Booking` (`booking_id`);
+ALTER TABLE `operator_user`
+  ADD CONSTRAINT `username_fk_op` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
 
 --
--- Constraints for table `Vehicle_info`
+-- Constraints for table `payment_info`
 --
-ALTER TABLE `Vehicle_info`
-  ADD CONSTRAINT `category_fk` FOREIGN KEY (`vehicle_category`) REFERENCES `Base_Fare` (`vehicle_category`),
+ALTER TABLE `payment_info`
+  ADD CONSTRAINT `booking_id_fk3` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`),
+  ADD CONSTRAINT `otp_fk` FOREIGN KEY (`OTP`) REFERENCES `booking` (`OTP`);
+
+--
+-- Constraints for table `slot_status`
+--
+ALTER TABLE `slot_status`
+  ADD CONSTRAINT `booking_id_fk` FOREIGN KEY (`booking_id`) REFERENCES `booking` (`booking_id`);
+
+--
+-- Constraints for table `vehicle_info`
+--
+ALTER TABLE `vehicle_info`
+  ADD CONSTRAINT `category_fk` FOREIGN KEY (`vehicle_category`) REFERENCES `base_fare` (`vehicle_category`),
   ADD CONSTRAINT `username_fk_v` FOREIGN KEY (`username`) REFERENCES `login_info` (`username`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
